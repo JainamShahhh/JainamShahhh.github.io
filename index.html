@@ -87,6 +87,8 @@ a{color:inherit}
 #cs span{font:700 11px var(--mono);padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.07);box-shadow:inset 0 1px 0 rgba(255,255,255,.14)}
 #cs span b{color:var(--lime)}
 #cx{margin-top:12px}#cx .btn{padding:9px 13px;font-size:12px}
+.capask{display:flex;gap:8px;margin-top:12px}.capask input{flex:1;min-width:0;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.16);border-radius:999px;color:var(--fg);padding:9px 14px;font:13px var(--mono);outline:none}.capask input:focus{border-color:var(--lime)}.capask .btn{padding:9px 13px;font-size:12px}
+.capans{font:400 18px/1.35 var(--serif);color:#ecebf3;margin-top:10px}
 /* drawers */
 .panel{position:fixed;right:24px;top:50%;z-index:12;width:min(460px,92vw);max-height:82vh;overflow:auto;padding:24px 26px;opacity:0;visibility:hidden;transform:translate(30px,-50%);transition:opacity .4s,transform .4s,visibility .4s}
 .panel.open{opacity:1;visibility:visible;transform:translate(0,-50%)}
@@ -154,8 +156,8 @@ body.nogl .panel .x{display:none}
 <div id="gate"><div class="gin">
   <div class="gk">JAINAM.SH</div>
   <h1>A film in <i>seven</i> layers.</h1>
-  <p>Rendered live in your browser by a <b id="gpar">200,320</b>-parameter model I trained on my CV. Best with sound.</p>
-  <div class="ctas"><button class="btn pri" id="gs">▶ enter with sound</button><button class="btn" id="gq">enter silently</button></div>
+  <p>Rendered live in your browser by a <b id="gpar">200,320</b>-parameter model I trained on my CV. Sound on.</p>
+  <div class="ctas"><button class="btn pri" id="gs">▶ enter</button></div>
   <div class="gl" id="gload">LOADING WEIGHTS…</div>
 </div></div>
 
@@ -181,8 +183,16 @@ body.nogl .panel .x{display:none}
 <div id="capbar" class="glass"><div class="kick" id="ck"></div><div id="ct"></div><div id="cs"></div><div class="ctas" id="cx"></div></div>
 
 <section class="panel glass" data-s="1"><button class="x" data-close>✕</button>
-  <div class="kick">LAYER 01 · EMBEDDING</div><h2>Me, as a vector.</h2>
-  <p>Every token becomes numbers before the model can think. The bars in the scene are the real embedding rows for your question. These numbers are mine.</p>
+  <div class="kick">LAYER 01 · EMBEDDING</div><h2>What I'm made of.</h2>
+  <ul class="tl">
+    <li><b>LLM</b><span>RLHF &amp; alignment, LoRA/PEFT, TRL, multi-node distributed training, Vertex AI, vLLM, llama.cpp, quantization, grammar-constrained decoding</span></li>
+    <li><b>EVALS</b><span>pre-registered evals, LLM-as-judge pipelines, A/B and hypothesis tests, held-out test sets, activation probing, variance reduction</span></li>
+    <li><b>AGENTS</b><span>tool-using agentic systems, function calling, MCP tools &amp; servers, WebGPU on-device inference</span></li>
+    <li><b>RECSYS</b><span>two-tower retrieval, ranking, candidate generation, uplift modelling (S-, T-, X-, R-learners), LightGBM, XGBoost</span></li>
+    <li><b>RL · MM</b><span>PPO (continuous control), multimodal fine-tuning (text + audio, text + vision), Voice AI</span></li>
+    <li><b>INFRA</b><span>GCP, AWS, Azure, Docker, Kubernetes, CI/CD, Airflow, Prometheus, Grafana, Redis, microservices, on-call</span></li>
+    <li><b>CODE</b><span>Python, Go (production), Rust, Java, C++, C, SQL, Bash, TypeScript · PyTorch, TensorFlow, JAX, Hugging Face</span></li>
+  </ul>
   <div class="stats" style="margin-top:14px">
     <div class="stat"><div class="n">4</div><div class="l">hackathon prizes in 2026</div></div>
     <div class="stat"><div class="n">1/946</div><div class="l">1st place, Hugging Face × Gradio</div></div>
@@ -247,7 +257,7 @@ body.nogl .panel .x{display:none}
   <p style="font-size:12px;color:var(--mut);margin-top:14px">M.Eng. Computer Engineering, University of Alberta (3.8) · B.Tech. CS, CHARUSAT (4.0) · <a href="https://ieeexplore.ieee.org/document/10426609" target="_blank" rel="noopener">IEEE paper ↗</a> · English, Gujarati, Hindi</p>
 </section>
 
-<div id="track"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+<div id="track"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
 
 <div class="modal" id="termM"><div class="glass term"><div id="out"></div><form id="tf"><input id="ti" autocomplete="off" placeholder="type 'help'"></form></div></div>
 <div class="modal" id="recM"><div class="glass rec">
@@ -321,12 +331,12 @@ let introDone=false,QR=M?M.run(Q0):null;
 /* ================= what each layer says (all facts from cv.md) ================= */
 const STG=[
  {k:'INPUT'},
- {k:'LAYER 01 · EMBEDDING',t:'Me, as a vector.',c:'Every token of your question becomes numbers before the model can think. The bars are its <b>real embedding weights</b>.',s:[['4','prizes in 2026'],['1/946','Hugging Face × Gradio'],['92%','blind win rate'],['<160ms','per decision'],['60,000','docs at once'],['3.8','M.Eng. GPA']]},
- {k:'LAYER 02 · POSITIONAL',t:"Where I've been, in order.",c:'The glowing surface is the model\'s <b>real learned positional embedding</b>. My timeline rides along it.'},
- {k:'LAYER 03 · SELF-ATTENTION',t:'Watch it read your question.',c:'The arcs are <b>real attention weights</b>, layers 2–3. Hover a token to see what it looks at.'},
- {k:'LAYER 04 · MULTI-HEAD',t:'Four heads. Four prizes.',c:'Inside each glass lens is <b>one real head</b> attending to your question. Click a ring for the story.'},
- {k:'LAYER 05 · FEED-FORWARD',t:'Things I built.',c:'The middle layer lights up with <b>real neuron activations</b> for your question. The 8 outputs are projects: click one.'},
- {k:'LAYER 06 · RESIDUAL STREAM',t:'Each layer adds to the last.',c:'Each glass layer glows with the <b>real residual-stream norm</b> after that block. Hover one for the role.'},
+ {k:'LAYER 01 · EMBEDDING',t:"What I'm made of.",c:'An embedding puts related things close together. These are my skills: six clusters, each skill near its neighbours. <b>Hover any skill</b> to see where I used it.',s:[['4','prizes in 2026'],['1/946','Hugging Face × Gradio'],['92%','blind win rate'],['<160ms','per decision'],['60,000','docs at once'],['3.8','M.Eng. GPA']]},
+ {k:'LAYER 02 · POSITIONAL',t:"Where I've been, in order.",c:'A transformer needs to know where each token sits. These are my positions in time, from Vadodara to Edmonton. <b>Click a card</b> for the full story.'},
+ {k:'LAYER 03 · SELF-ATTENTION',t:'Watch it read your question.',c:'The arcs are <b>real attention weights</b> from the model on this page. Hover a token to see what it looks at.'},
+ {k:'LAYER 04 · MULTI-HEAD',t:'Four heads. Four hackathon prizes.',c:'All four won in 2026. <b>Click any ring</b> for the story and the proof. (The faint grid inside each lens is one real attention head reading your question.)'},
+ {k:'LAYER 05 · FEED-FORWARD',t:'Things I built.',c:'Eight output neurons, eight projects. <b>Click any glowing neuron or name</b> to open it. The middle layer lights up with real neuron activations for your question.'},
+ {k:'LAYER 06 · RESIDUAL STREAM',t:'Each layer adds to the last.',c:'Every role added something measurable. Each glass step carries the numbers; <b>click a step</b> for the full story.'},
  {k:'LAYER 07 · OUTPUT',t:'The next token is you.',c:''}];
 
 /* ================= sound: synthesized sfx + a generative score that follows the layers ================= */
@@ -346,15 +356,15 @@ const AU=(()=>{let ctx=null,on=false,master,rev,dest,noise,mus=null;
   const bo=ctx.createOscillator(),bg=ctx.createGain();bo.type='sine';bg.gain.value=0;bo.connect(bg);bg.connect(master);bo.start();
   const lfo=ctx.createOscillator(),lg=ctx.createGain();lfo.frequency.value=.06;lg.gain.value=120;lfo.connect(lg);lg.connect(padF.frequency);lfo.start();
   mus={padF,padG,bg,voices,bo,stage:-1,step:0,next:ctx.currentTime+.2,arp:0};setInterval(sched,50);setStage(0,true);
-  padG.gain.linearRampToValueAtTime(.5,ctx.currentTime+5);bg.gain.linearRampToValueAtTime(.14,ctx.currentTime+5)}
+  padG.gain.linearRampToValueAtTime(.34,ctx.currentTime+5);bg.gain.linearRampToValueAtTime(.1,ctx.currentTime+5)}
  function setStage(i,now){if(!mus||mus.stage===i)return;mus.stage=i;const c=CH[i],t=ctx.currentTime,tc=now?.01:.8;
   mus.voices.forEach((v,k)=>{const f=mtof(c[1+k]);v.o1.frequency.setTargetAtTime(f,t,tc);v.o2.frequency.setTargetAtTime(f,t,tc)});
   mus.bo.frequency.setTargetAtTime(mtof(c[0]-12),t,tc);mus.padF.frequency.setTargetAtTime(380+i*150,t,1.4)}
  function sched(){if(!mus||!on)return;const spb=60/92/2;while(mus.next<ctx.currentTime+.3){const c=CH[Math.max(0,mus.stage)],s=mus.step++;
   if(mus.arp>0&&(s%2===0||Math.random()<.18+mus.stage*.06)){const n=c[1+((s*3)%5)]+(s%16>7?12:0);pluck(mtof(n+12),mus.next,.03*mus.arp)}mus.next+=spb}}
  const api={get on(){return on},
-  enable(){if(!ctx&&!init())return;on=true;ctx.resume();master.gain.setTargetAtTime(.85,ctx.currentTime,.2);startMusic();$('#snd').textContent='sound: on';$('#snd').classList.add('on')},
-  toggle(){if(!ctx&&!init()){toast('no audio on this device');return}on=!on;ctx.resume();master.gain.setTargetAtTime(on?.85:0,ctx.currentTime,.25);if(on)startMusic();$('#snd').textContent='sound: '+(on?'on':'off');$('#snd').classList.toggle('on',on)},
+  enable(){if(!ctx&&!init())return;on=true;ctx.resume();master.gain.setTargetAtTime(.48,ctx.currentTime,.2);startMusic();$('#snd').textContent='sound: on';$('#snd').classList.add('on')},
+  toggle(){if(!ctx&&!init()){toast('no audio on this device');return}on=!on;ctx.resume();master.gain.setTargetAtTime(on?.48:0,ctx.currentTime,.25);if(on)startMusic();$('#snd').textContent='sound: '+(on?'on':'off');$('#snd').classList.toggle('on',on)},
   arp(k){if(mus)mus.arp=k},
   stage(i){setStage(i)},
   key(){tone(2200+Math.random()*900,{d:.035,v:.03,type:'square'});tone(140,{d:.05,v:.03})},
@@ -589,35 +599,62 @@ const river=new THREE.Points(rvG,new THREE.ShaderMaterial({uniforms:rvU,transpar
  fragmentShader:`varying vec3 vC;varying float vA;void main(){float d=length(gl_PointCoord-.5),a=smoothstep(.5,0.,d);a*=a;gl_FragColor=vec4(vC*a*vA,1.);}`}));
 river.frustumCulled=false;river.layers.set(2);scene.add(river);
 
-/* ================= STAGE 1 · EMBEDDING: the real embedding rows of YOUR question ================= */
-const g1=group(1);sub(g1,'real embedding rows · first 12 of 64 dims',4.3);
-const MAXT=16,ED=12,bars=new THREE.InstancedMesh(new THREE.BoxGeometry(.6,1,.6),glowify(new THREE.MeshPhysicalMaterial({metalness:.15,roughness:.32,clearcoat:1,clearcoatRoughness:.08}),.5,.6),MAXT*ED);bars.count=0;g1.add(bars);
-for(let k=0;k<MAXT*ED;k++)bars.setColorAt(k,LIME);
-const barHit=new THREE.Mesh(new THREE.BoxGeometry(1,4.5,ED*.84),new THREE.MeshBasicMaterial({visible:false}));barHit.position.y=-.3;g1.add(barHit);
-let E1={tk:[],ev:[],mx:1,labs:[],sp:1.7,unk:[]},barHot=-1;
-function build1(r){E1.labs.forEach(dispose);const names=['<s>',...r.toks.map(t=>t.w),'<a>'].slice(0,MAXT),ids=[1,...r.toks.map(t=>t.id),2].slice(0,MAXT),n=names.length;
- E1={tk:names,unk:ids.map(i=>i===4),ev:ids.map(id=>M?[...M.emb(id).slice(0,ED)]:[...Array(ED)].map(()=>Math.random()*2-1)),sp:Math.min(1.7,15/n),labs:[]};E1.mx=Math.max(...E1.ev.flat().map(Math.abs));bars.count=n*ED;barHit.scale.x=n*E1.sp;
- E1.labs=names.map((t,a)=>{const s=label(t,{size:40,scale:.42,bg:E1.unk[a]?'rgba(70,16,10,.9)':'rgba(20,14,44,.9)',color:E1.unk[a]?'#ff8a70':'#ece9ff'});s.position.set((a-(n-1)/2)*E1.sp,-2.9,ED*.42+.6);g1.add(s);return s})}
-function upd1(t){const n=E1.tk.length;let k=0;for(let a=0;a<n;a++)for(let b=0;b<ED;b++,k++){const v=E1.ev[a][b]/E1.mx,h=.25+(v*.5+.5)*3.6*(.95+.05*Math.sin(t*1.6+k)),hot=a===barHot;
-  tmp.position.set((a-(n-1)/2)*E1.sp,h/2-2.3,(b-(ED-1)/2)*.84);tmp.rotation.set(0,0,0);tmp.scale.set(hot?1.15:1,h,hot?1.15:1);tmp.updateMatrix();bars.setMatrixAt(k,tmp.matrix);
-  col.setHSL(.74-(v*.5+.5)*.47,.92,.42+(v*.5+.5)*.16);if(hot)col.multiplyScalar(1.9);bars.setColorAt(k,col)}bars.instanceMatrix.needsUpdate=true;bars.instanceColor.needsUpdate=true}
-HOT.push({o:barHit,st:1,tip:p=>{const lp=g1.worldToLocal(p.clone()),n=E1.tk.length,a=Math.max(0,Math.min(n-1,Math.round(lp.x/E1.sp+(n-1)/2)));barHot=a;return`token <b>"${esc(E1.tk[a])}"</b>${E1.unk[a]?' (unknown → &lt;unk&gt;)':''}<br>${E1.ev[a].slice(0,6).map(x=>x.toFixed(2)).join(' ')} …<br><span class="small">real learned weights, int8</span>`},on:h=>{if(!h)barHot=-1}});
+/* ================= STAGE 1 · EMBEDDING: what I'm made of, as an embedding space (all from cv.md) ================= */
+const g1=group(1),ORIENT={};
+const SK=[
+ ['LLM TRAINING',0xc6ff3d,[['RLHF & alignment','RLHF and alignment training workflows at Amii'],['LoRA / PEFT','LoRA on HelaLM, CashSage-4B, AgriReason-4B and six PARRY generations'],['TRL','fine-tuning and RLHF with TRL'],['multi-node training','multi-node distributed training at Amii'],['PyTorch · JAX','PyTorch daily; JAX on TPU for the ARC challenge'],['Vertex AI','training and fine-tuning on GCP Vertex AI']],/rlhf|align|lora|peft|fine|train|pytorch|jax|torch|tun/],
+ ['EVALS & RESEARCH',0x3de0ff,[['pre-registered evals','pre-registered evals for every PARRY LoRA generation'],['LLM-as-judge','LLM-as-judge eval pipelines'],['A/B tests','A/B and hypothesis tests before and after rollout at Amii'],['held-out test sets','held-out sets from unseen repos for the Gemma 4 agent'],['activation probing','probing 17 models in the Secret Loyalties audit'],['variance reduction','control variates and quasi-Monte-Carlo in the ARC challenge']],/eval|test|bench|judge|metric|research|measur|safety|audit/],
+ ['AGENTS & ON-DEVICE',0xff8a5c,[['tool-using agents','agentic, tool-using LLM systems in production at Amii'],['MCP','MCP tools and servers'],['WebGPU inference','PARRY: a 1.5B LLM in the browser, under 160ms per decision'],['constrained decoding','grammar-constrained decoding in PARRY'],['vLLM · llama.cpp','serving and quantized inference'],['Kaggle coding agent','Gemma 4 agent, ~3,300 teams']],/agent|tool|mcp|webgpu|browser|parry|device|gemma|kaggle/],
+ ['RECSYS & ML',0xb18cff,[['two-tower retrieval','two-tower retrieval in production at Amii'],['ranking models','ranking models, from training to real-time serving'],['uplift modelling','uplift modelling with S-, T-, X- and R-learners'],['LightGBM · XGBoost','gradient-boosted models'],['PPO · RL','PPO drone navigation in an Unreal Engine simulator'],['multimodal','audio + vision fine-tunes: Qwen2-Audio, LLaVA, Qwen-VL']],/recommend|recsys|rank|retriev|search|rl\b|ppo|drone|vision|audio|multimodal|ml\b/],
+ ['BACKEND & INFRA',0x7ad7ff,[['Kubernetes','real-time pipelines on Kubernetes at Cequence'],['GCP · AWS','Cloud Run at Amii, AWS at Cequence'],['Redis','Redis caching with an automated fallback path'],['Airflow','Airflow workflows: investigation time down 40%'],['Prometheus · Grafana','a Prometheus stack at about half the cost of Datadog'],['CI/CD · on-call','CI/CD, on-call rotations, incident response']],/backend|kube|cloud|gcp|aws|redis|airflow|devops|infra|system|pipeline|api|deploy/],
+ ['LANGUAGES',0xffd166,[['Python','everything on this page, and the model in it'],['Go','shipped in production'],['Rust','in the toolbox'],['C++','in the toolbox'],['TypeScript','this site\'s cousin: PARRY\'s front end'],['SQL','PostgreSQL, MySQL, DynamoDB']],/python|\bgo\b|rust|java|c\+\+|typescript|sql|language|stack|code/]];
+const SKC=[];let skHot=-1;
+SK.forEach(([cat,cv,items,re],ci)=>{const a=ci/SK.length*Math.PI*2+.5,R0=MOB?3.0:8.6,cx=Math.cos(a)*R0+(MOB?0:2.6),cy=Math.sin(a)*(MOB?6.4:3.2)+(MOB?0:1.4),cz=Math.sin(a*2)*1.4;
+ const cg=new THREE.Group();cg.position.set(cx,cy,cz);g1.add(cg);const C=new THREE.Color(cv),hex='#'+cv.toString(16).padStart(6,'0');
+ const hl=label(cat,{size:40,color:hex,scale:MOB?.5:.6});hl.material.depthTest=false;hl.renderOrder=8;cg.add(hl);
+ const core=new THREE.Mesh(new THREE.SphereGeometry(.13,16,12),new THREE.MeshBasicMaterial({color:C.clone().multiplyScalar(2.5)}));core.position.y=-.45;cg.add(core);
+ const lp=[],chips=items.map(([s,ev],k)=>{const b=k/items.length*Math.PI*2+ci,r=MOB?1.45:2.55,pos=new THREE.Vector3(Math.cos(b)*r*1.2,Math.sin(b)*r*.62-.45,Math.sin(b)*.9);
+  const sp=label(s,{size:30,scale:MOB?.4:.46,bg:'rgba(14,12,30,.9)',color:'#ece9ff'});sp.position.copy(pos);cg.add(sp);lp.push(0,-.45,0,pos.x,pos.y,pos.z);
+  HOT.push({o:sp,st:1,tip:()=>`<b>${esc(s)}</b> · ${esc(cat.toLowerCase())}<br><span class="small">${esc(ev)}</span>`,on:h=>{skHot=h?ci:-1}});return sp});
+ const lg=new THREE.BufferGeometry();lg.setAttribute('position',new THREE.Float32BufferAttribute(lp,3));const ln=new THREE.LineSegments(lg,new THREE.LineBasicMaterial({color:C.clone().multiplyScalar(1.3),transparent:true,opacity:.35,depthWrite:false}));ln.layers.set(2);cg.add(ln);
+ SKC.push({cg,cat,re,hl,core,ln,chips,C,glow:0,q:0,ph:Math.random()*6,base:cg.position.clone()})});
+{const lp=[];SKC.forEach((c,i)=>{const d=SKC[(i+1)%SKC.length];lp.push(c.base.x,c.base.y-.45,c.base.z,d.base.x,d.base.y-.45,d.base.z)});const lg=new THREE.BufferGeometry();lg.setAttribute('position',new THREE.Float32BufferAttribute(lp,3));const l=new THREE.LineSegments(lg,new THREE.LineBasicMaterial({color:0x7a5cff,transparent:true,opacity:.18,depthWrite:false}));l.layers.set(2);g1.add(l)}
+function build1(r){const q=(r.q||'').toLowerCase();SKC.forEach(c=>c.q=c.re.test(q)?1:0);SK1=SKC.filter(c=>c.q).map(c=>c.cat)}
+let SK1=[];
+function upd1(t,dt){g1.rotation.y=Math.sin(t*.12)*.12;SKC.forEach((c,i)=>{const on=Math.max(c.q*.7,skHot===i?1:0);c.glow+=(on-c.glow)*(1-Math.exp(-dt*6));c.cg.position.y=c.base.y+Math.sin(t*.6+c.ph)*.18;c.cg.scale.setScalar(1+c.glow*.14);
+ c.core.scale.setScalar(1+c.glow*1.4+Math.sin(t*2+i)*.15);c.ln.material.opacity=.3+c.glow*.6;c.chips.forEach((s,k)=>s.position.z+=Math.sin(t*.8+k+i)*.0015)})}
 
-/* ================= STAGE 2 · POSITIONAL: the real learned positional embedding, my timeline riding on it ================= */
-const g2=group(2);sub(g2,'learned positional embedding · 65 positions × 64 dims · real',4.6);
-const PE=M?M.W['pos.weight']:new Float32Array(65*64),PT=65,PD=64;let pemx=1e-9;for(let i=0;i<PE.length;i++)pemx=Math.max(pemx,Math.abs(PE[i]));
-const pp2=new Float32Array(PT*PD*3),pc2=new Float32Array(PT*PD*3),pg2=new THREE.BufferGeometry();pg2.setAttribute('position',new THREE.BufferAttribute(pp2,3));pg2.setAttribute('color',new THREE.BufferAttribute(pc2,3));
-const PXf=p=>(p/(PT-1)-.5)*30,PZf=d=>(d/(PD-1)-.5)*13;const pts2=new THREE.Points(pg2,new THREE.PointsMaterial({size:.21,vertexColors:true,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));pts2.layers.set(2);g2.add(pts2);
-[['2021–23','Software Engineer'],['2023–24','PluginLive · led 12–15'],['2024','B.Tech · GPA 4.0'],['2025','Cequence Security'],['2025 →','Amii · ML Engineer'],['2026','M.Eng · 3.8 · 4 prizes']].forEach(([y,t],i)=>{const a=label(y,{size:44,color:'#c6ff3d',scale:.5}),b=label(t,{size:30,color:'#d0d0de',scale:.34}),x=-12.5+i*5;a.position.set(x,3.3,-8);b.position.set(x,2.65,-8);g2.add(a,b)});
-let M2={n:0,objs:[]};
-function build2(r){M2.objs.forEach(dispose);M2.objs=[];const names=['<s>',...r.toks.map(t=>t.w),'<a>'];M2.n=names.length;
- names.forEach((w,k)=>{const x=PXf(k),b=new THREE.Mesh(new THREE.CylinderGeometry(.03,.03,4.4,6),new THREE.MeshBasicMaterial({color:new THREE.Color(0xc6ff3d).multiplyScalar(1.8),transparent:true,opacity:.8,depthWrite:false,blending:THREE.AdditiveBlending}));b.position.set(x,.4,7);b.layers.set(2);g2.add(b);
-  const l=label(w,{size:32,scale:.36,bg:'rgba(20,14,44,.9)'});l.position.set(x,2.95+(k%2)*.5,7);g2.add(l);M2.objs.push(b,l)})}
-function upd2(t){let k=0;const sw=(t*10)%90-10;for(let p=0;p<PT;p++){const act=p<M2.n?1:0,s=Math.exp(-Math.pow(sw-p,2)/14);for(let d=0;d<PD;d++,k++){const v=PE[p*PD+d]/pemx,y=v*2.3-1.2+Math.sin(t*1.3+p*.35+d*.12)*.06;
-  pp2[k*3]=PXf(p);pp2[k*3+1]=y;pp2[k*3+2]=PZf(d);col.setHSL(.62-v*.12,.95,.4+Math.abs(v)*.25).multiplyScalar(.5+act*.9+s*1.3);pc2[k*3]=col.r;pc2[k*3+1]=col.g;pc2[k*3+2]=col.b}}pg2.attributes.position.needsUpdate=true;pg2.attributes.color.needsUpdate=true}
+/* ================= STAGE 2 · POSITIONAL: where I've been, as positions in time ================= */
+const g2=group(2);ORIENT[2]=[];
+const TLN=[['2021–23','Software Engineer','Absolute Web · STERP · Digikentro','three roles in Vadodara, India','e0'],['2023–24','ML Engineer','PluginLive · Mumbai','early-stage startup · led 12–15 engineers','e1'],['2024','B.Tech. Computer Science','CHARUSAT','GPA 4.0 / 4.0',null],['2024–26','M.Eng. Computer Engineering','University of Alberta','GPA 3.8 / 4.0',null],['2025','ML Intern','Cequence Security · Santa Clara','real-time pipelines · on-call','e2'],['2025 →','ML Engineer','Amii · Edmonton','RLHF · agents · retrieval & ranking','e3'],['2026','4 hackathon prizes','1st of 946 · Modal · 1st · 2nd','PARRY · HelaLM · CashSage-4B','p0']];
+function tlCanvas(y,role,org,line,click){const c=document.createElement('canvas');c.width=1000;c.height=560;const g=c.getContext('2d'),r=44;
+ const grd=g.createLinearGradient(0,0,1000,560);grd.addColorStop(0,'rgba(255,255,255,.16)');grd.addColorStop(.5,'rgba(255,255,255,.05)');grd.addColorStop(1,'rgba(255,255,255,.10)');
+ g.beginPath();g.moveTo(r,4);g.arcTo(996,4,996,556,r);g.arcTo(996,556,4,556,r);g.arcTo(4,556,4,4,r);g.arcTo(4,4,996,4,r);g.closePath();g.fillStyle='rgba(10,9,22,.78)';g.fill();g.fillStyle=grd;g.fill();g.lineWidth=3;g.strokeStyle='rgba(255,255,255,.4)';g.stroke();
+ g.fillStyle='#c6ff3d';g.font='800 64px ui-monospace,SFMono-Regular,Menlo,monospace';g.fillText(y,56,118);
+ g.fillStyle='#f6f5fb';fitFont(g,role,92,'italic 400 FSpx "Instrument Serif",Georgia,serif');if(g.measureText(role).width>890){g.font=g.font.replace(/\d+px/,'74px')}g.fillText(role,52,238);
+ g.fillStyle='#d4d4e2';g.font='600 50px ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif';g.fillText(org,56,322);
+ g.fillStyle='#b9b9cc';g.font='600 40px ui-monospace,SFMono-Regular,Menlo,monospace';fitFont(g,line,40,'600 FSpx ui-monospace,SFMono-Regular,Menlo,monospace');if(g.measureText(line).width>890)g.font='600 34px ui-monospace,Menlo,monospace';g.fillText(line,56,408);
+ if(click){g.fillStyle='#c6ff3d';g.font='700 30px ui-monospace,SFMono-Regular,Menlo,monospace';g.fillText('click for the story ↗',56,492)}return c}
+const TLP=TLN.map((_,i)=>MOB?new THREE.Vector3(0,8.6-i*2.9,0):new THREE.Vector3(-13.8+i*4.6,Math.sin(i*1.3)*.35,Math.cos(i*.9)*.5));
+const rail2=new THREE.CatmullRomCurve3([TLP[0].clone().add(MOB?new THREE.Vector3(0,2.5,0):new THREE.Vector3(-3,0,0)),...TLP,TLP[TLP.length-1].clone().add(MOB?new THREE.Vector3(0,-2.5,0):new THREE.Vector3(3,0,0))]);
+{const m=new THREE.Mesh(new THREE.TubeGeometry(rail2,240,.045,8,false),new THREE.MeshBasicMaterial({color:new THREE.Color(0xc6ff3d).multiplyScalar(1.5)}));m.layers.set(2);g2.add(m)}
+const pulse2=new THREE.Mesh(new THREE.SphereGeometry(.16,16,12),new THREE.MeshBasicMaterial({color:new THREE.Color(0xeaffb0).multiplyScalar(4)}));pulse2.layers.set(2);g2.add(pulse2);
+const waves2=[.22,.45,.9].map((f,k)=>{const n=220,pa=new Float32Array(n*3),g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(pa,3));const l=new THREE.Line(g,new THREE.LineBasicMaterial({color:[0x7a5cff,0x3de0ff,0xb18cff][k],transparent:true,opacity:.35,depthWrite:false}));l.layers.set(2);g2.add(l);return{l,pa,f,n,k}});
+const TLC=TLN.map(([y,role,org,line,id],i)=>{const p=TLP[i],up=MOB?(i%2?1:-1):(i%2?-1:1),cw=MOB?4.8:6.6,card=textPlane(tlCanvas(y,role,org,line,!!id),cw);
+ card.position.set(MOB?up*1.25:p.x,MOB?p.y:p.y+up*2.95,p.z+(MOB?.3:0));g2.add(card);ORIENT[2].push(card);
+ const node=new THREE.Mesh(new THREE.SphereGeometry(.17,16,12),new THREE.MeshBasicMaterial({color:new THREE.Color(0xc6ff3d).multiplyScalar(2.6)}));node.position.copy(p);node.layers.set(2);g2.add(node);
+ const cg=new THREE.BufferGeometry().setFromPoints([p,MOB?new THREE.Vector3(up*.6,p.y,p.z):new THREE.Vector3(p.x,p.y+up*1.1,p.z)]),cl2=new THREE.Line(cg,new THREE.LineBasicMaterial({color:0xc6ff3d,transparent:true,opacity:.5}));cl2.layers.set(2);g2.add(cl2);
+ const o={card,node,hv:0,i};HOT.push({o:card,st:2,tip:()=>`<b>${esc(y)}</b> · ${esc(role)}<br><span class="small">${esc(org)}${id?' · click for the story':''}</span>`,on:h=>{o.on=h},click:id?()=>card_(id):null});return o});
+function card_(id){card(id)}
+function build2(){}
+function upd2(t,dt){const u=(t*.07)%1;pulse2.position.copy(rail2.getPointAt(u));pulse2.scale.setScalar(1+Math.sin(t*6)*.2);
+ waves2.forEach(w=>{for(let j=0;j<w.n;j++){const x=(j/(w.n-1)-.5)*34;if(MOB){w.pa[j*3]=-3.2+Math.sin(x*w.f*1.4-t*.9+w.k)*.5+w.k*.2;w.pa[j*3+1]=x*.6;w.pa[j*3+2]=-1.5}else{w.pa[j*3]=x;w.pa[j*3+1]=-5.6+w.k*.55+Math.sin(x*w.f-t*.9+w.k)*.45;w.pa[j*3+2]=-1.5}}w.l.geometry.attributes.position.needsUpdate=true});
+ const arr=Math.abs(pC-2)<.4;TLC.forEach((c,i)=>{const tgt=arr?cl((revT2-i*.14)/.5):0;c.card.material.uniforms.uRev.value+=(tgt-c.card.material.uniforms.uRev.value)*(1-Math.exp(-dt*5));c.hv+=((c.on?1:0)-c.hv)*(1-Math.exp(-dt*10));c.card.scale.setScalar(1+c.hv*.07);c.node.scale.setScalar(1+c.hv*.8+Math.max(0,1-Math.abs(((t*.07)%1)*(TLN.length+1)-(i+1)))*.9)});
+ revT2=arr?revT2+dt:0}
+let revT2=0;
 
 /* ================= STAGE 3 · SELF-ATTENTION: the real model's real attention over your question ================= */
-const g3=group(3);sub(g3,`real weights · ${KP} params · layers 2–3, heads averaged`,5.2);
+const g3=group(3);
 const SPH=new THREE.SphereGeometry(.5,48,32),CORE=new THREE.SphereGeometry(.2,24,16);
 let T3={n:0,sph:[],cores:[],labs:[],arcs:[],res:null,P:[],gen:[],ph:0,step:-1,pin:-1,word:null,mode:0,live:-1};
 const hm=new THREE.InstancedMesh(new THREE.BoxGeometry(.5,.5,.14),new THREE.MeshBasicMaterial({color:0xffffff}),256);g3.add(hm);hm.count=0;
@@ -644,62 +681,103 @@ function upd3(t,dt){if(!T3.res)return;attnBoost*=.985;const n=T3.n,nP=n-1,nG=T3.
  T3.cores.forEach((c,a)=>{const v=wv&&a<wv.length?wv[a]:0;c.material.color.copy(LIME).multiplyScalar(.06+v*7*(a===row?.6:1));c.scale.setScalar((.6+v*1.4)*Math.min(1,T3.sph[a].scale.x));T3.sph[a].material.uniforms.glow.value=v*1.2;T3.sph[a].material.uniforms.hl.value=a===row?.8:0})}
 FX.reader=i=>{T3.live=i;setWord(T3.res?.out[i]?.s)};FX.idle=()=>{T3.live=-1;T3.mode=0;T3.step=-1;setWord('')};
 
-/* ================= STAGE 4 · MULTI-HEAD: chrome rings, glass lenses, a real head inside each ================= */
-const g4=group(4);sub(g4,'each lens: one real attention head on your question · click a ring',4.2);
-const HD=[['HEAD 1','1ST / 946',0xc6ff3d,'p0'],['HEAD 2','$10K MODAL',0x3de0ff,'p1'],['HEAD 3','1ST · LANGUAGE',0xff5a3c,'p2'],['HEAD 4','2ND · FINANCE',0xb18cff,'p3']];
+/* ================= STAGE 4 · MULTI-HEAD: four heads, four hackathon prizes ================= */
+const g4=group(4);ORIENT[4]=[];
+const HD=[['1ST / 946','Hugging Face × Gradio','PARRY',0xc6ff3d,'p0'],['$10K','Modal sponsor track','PARRY',0x3de0ff,'p1'],['1ST','AutoScientist · Language','HelaLM',0xff5a3c,'p2'],['2ND','AutoScientist · Finance','CashSage-4B',0xb18cff,'p3']];
 const LENS=new THREE.SphereGeometry(1.5,48,32);
-const heads=HD.map(([h,p,c,id],i)=>{const g=new THREE.Group(),bx=MOB?((i%2)-.5)*5.2:(i-1.5)*5.6,by=MOB?(i<2?1.6:-3):0;g.position.set(bx,by,0);
+function plaqueCanvas(ev,proj,hex){const c=document.createElement('canvas');c.width=1100;c.height=380;const g=c.getContext('2d'),r=40;g.beginPath();g.moveTo(r,4);g.arcTo(1096,4,1096,376,r);g.arcTo(1096,376,4,376,r);g.arcTo(4,376,4,4,r);g.arcTo(4,4,1096,4,r);g.closePath();
+ g.fillStyle='rgba(10,9,22,.8)';g.fill();const grd=g.createLinearGradient(0,0,1100,380);grd.addColorStop(0,'rgba(255,255,255,.15)');grd.addColorStop(1,'rgba(255,255,255,.03)');g.fillStyle=grd;g.fill();g.lineWidth=3;g.strokeStyle=hex;g.globalAlpha=.7;g.stroke();g.globalAlpha=1;
+ g.textAlign='center';g.fillStyle='#f6f5fb';fitFont(g,ev,96,'italic 400 FSpx "Instrument Serif",Georgia,serif');g.fillText(ev,550,128);g.fillStyle=hex;g.font='800 54px ui-monospace,SFMono-Regular,Menlo,monospace';g.fillText(proj,550,226);
+ g.fillStyle='#a7a7bc';g.font='700 34px ui-monospace,SFMono-Regular,Menlo,monospace';g.fillText('click for the story ↗',550,312);return c}
+const heads=HD.map(([rank,ev,proj,c,id],i)=>{const g=new THREE.Group(),bx=MOB?((i%2)-.5)*5.4:(i-1.5)*6,by=MOB?(i<2?2.6:-4.2):.6;g.position.set(bx,by,0);const hex='#'+c.toString(16).padStart(6,'0'),cc=new THREE.Color(c);
  const t1=new THREE.Mesh(new THREE.TorusGeometry(2,.11,32,160),new THREE.MeshPhysicalMaterial({color:c,emissive:c,emissiveIntensity:.35,metalness:1,roughness:.12,clearcoat:1,clearcoatRoughness:.05}));
- const t2=new THREE.Mesh(new THREE.TorusGeometry(1.62,.03,16,140),new THREE.MeshBasicMaterial({color:new THREE.Color(c).multiplyScalar(1.6),transparent:true,opacity:.6}));t2.layers.set(2);
- const cc=new THREE.Color(c),lens=asGlass(new THREE.Mesh(LENS,glassMat({ior:.11,tint:[.9+cc.r*.12,.9+cc.g*.12,.9+cc.b*.12],rim:[cc.r,cc.g,cc.b]})));lens.scale.set(1,1,.2);
- const hc=document.createElement('canvas');hc.width=hc.height=256;const ht=new THREE.CanvasTexture(hc);ht.encoding=THREE.sRGBEncoding;const disc=new THREE.Mesh(new THREE.CircleGeometry(1.36,64),new THREE.MeshBasicMaterial({map:ht,transparent:true,opacity:.62,depthWrite:false}));disc.position.z=-.5;
- const l1=label(h,{size:38,color:'#a7a7bc',scale:.4}),l2=label(p,{size:52,color:'#'+c.toString(16).padStart(6,'0'),scale:.58});l1.position.set(0,.42,.6);l2.position.set(0,-.22,.6);[l1,l2].forEach(l=>{l.material.depthTest=false;l.renderOrder=10});g.add(t1,t2,disc,lens,l1,l2);g4.add(g);
- const o={g,t1,t2,lens,bx,by,hov:0,spin:0,id,hc,ht};HOT.push({o:lens,st:4,id,tip:()=>`<b>${h}</b> · ${p}<br><span class="small">the grid inside is this head's real attention · click for the story</span>`,on:hh=>{o.hv=hh},click:()=>{o.spin=1;card(id)}});return o});
+ const t2=new THREE.Mesh(new THREE.TorusGeometry(1.62,.03,16,140),new THREE.MeshBasicMaterial({color:cc.clone().multiplyScalar(1.6),transparent:true,opacity:.6}));t2.layers.set(2);
+ const halo=new THREE.Mesh(new THREE.TorusGeometry(2.45,.018,8,160),new THREE.MeshBasicMaterial({color:cc.clone().multiplyScalar(2),transparent:true,opacity:.5,depthWrite:false,blending:THREE.AdditiveBlending}));halo.layers.set(2);
+ const lens=asGlass(new THREE.Mesh(LENS,glassMat({ior:.11,tint:[.9+cc.r*.12,.9+cc.g*.12,.9+cc.b*.12],rim:[cc.r,cc.g,cc.b]})));lens.userData.shared=1;lens.scale.set(1,1,.2);
+ const hc=document.createElement('canvas');hc.width=hc.height=256;const ht=new THREE.CanvasTexture(hc);ht.encoding=THREE.sRGBEncoding;const disc=new THREE.Mesh(new THREE.CircleGeometry(1.36,64),new THREE.MeshBasicMaterial({map:ht,transparent:true,opacity:.3,depthWrite:false}));disc.position.z=-.5;
+ const rk=label(rank,{size:76,color:hex,scale:rank.length>5?.82:1.05,font:'400 FSpx "Instrument Serif",Georgia,serif'});rk.position.set(0,0,.6);rk.material.depthTest=false;rk.renderOrder=10;
+ const pq=textPlane(plaqueCanvas(ev,proj,hex),MOB?4.2:5.3);pq.position.set(0,MOB?-2.85:-3.35,.2);ORIENT[4].push(pq);
+ g.add(t1,t2,halo,disc,lens,rk,pq);g4.add(g);
+ const o={g,t1,t2,lens,halo,pq,bx,by,hov:0,spin:0,id,hc,ht};const hit={o:lens,st:4,id,tip:()=>`<b>${rank}</b> · ${esc(ev)}<br><span class="small">${esc(proj)} · click for the story</span>`,on:hh=>{o.hv=hh},click:()=>{o.spin=1;card(id)}};HOT.push(hit,{...hit,o:pq});return o});
 function build4(r){const n=r.rows.length;heads.forEach((h,hi)=>{const g=h.hc.getContext('2d');g.clearRect(0,0,256,256);g.save();g.beginPath();g.arc(128,128,126,0,7);g.clip();g.fillStyle='rgba(6,6,14,.9)';g.fillRect(0,0,256,256);const cs=176/n,o=40;
  for(let i=0;i<n;i++){const row=r.rows[i][M.cfg.L-1][hi];let mx=1e-9;for(let j=0;j<=i;j++)mx=Math.max(mx,row[j]);for(let j=0;j<=i;j++){const v=row[j]/mx;g.fillStyle=`rgba(${Math.round(120+78*v)},${Math.round(90+165*v)},${Math.round(255-194*v)},${(.12+v*.88).toFixed(2)})`;g.fillRect(o+j*cs+1,o+i*cs+1,cs-2,cs-2)}}
  g.restore();h.ht.needsUpdate=true})}
-function upd4(t,dt){heads.forEach((h,i)=>{h.hov+=((h.hv||hoverCard===h.id?1:0)-h.hov)*(1-Math.exp(-dt*10));h.spin*=.96;
- h.t1.rotation.x=t*.55+i+h.spin*6;h.t1.rotation.y=t*.38*(i%2?1:-1);h.t2.rotation.y=-t*.85+i;h.t2.rotation.z=t*.3;h.g.position.y=h.by+Math.sin(t*.8+i)*.35;h.g.position.z=h.hov*1.2;h.g.scale.setScalar(1+h.hov*.1);
- h.t1.material.emissiveIntensity=.35+h.hov*2.2;h.lens.material.uniforms.hl.value=h.hov;h.lens.material.uniforms.glow.value=h.hov*.25})}
+function upd4(t,dt){const arr=Math.abs(pC-4)<.4;heads.forEach((h,i)=>{h.hov+=((h.hv||hoverCard===h.id?1:0)-h.hov)*(1-Math.exp(-dt*10));h.spin*=.96;
+ h.t1.rotation.x=t*.45+i+h.spin*6;h.t1.rotation.y=t*.3*(i%2?1:-1);h.t2.rotation.y=-t*.7+i;h.t2.rotation.z=t*.3;h.g.position.y=h.by+Math.sin(t*.8+i)*.25;h.g.position.z=h.hov*1.1;h.g.scale.setScalar(1+h.hov*.08);
+ const pl=(Math.sin(t*2.2-i*.8)*.5+.5);h.halo.scale.setScalar(1+pl*.08+h.hov*.06);h.halo.material.opacity=.15+pl*.35+h.hov*.5;
+ h.t1.material.emissiveIntensity=.35+h.hov*2.2;h.lens.material.uniforms.hl.value=h.hov;h.lens.material.uniforms.glow.value=h.hov*.25;
+ const u=h.pq.material.uniforms;u.uRev.value+=((arr?1:0)-u.uRev.value)*(1-Math.exp(-dt*(arr?2.6-i*.3:8)))})}
 
-/* ================= STAGE 5 · FEED-FORWARD: real neuron activations; 8 outputs = 8 projects ================= */
-const g5=group(5);sub(g5,'16 of 256 real neurons, layer 3, for your question · hover the outputs',5.0);
-const LSZ=[8,16,8],ND=[];LSZ.forEach((n,li)=>{for(let k=0;k<n;k++)ND.push({p:new THREE.Vector3((li-1)*5.6,((n-1)/2-k)*(li===1?.56:.95),li===1?Math.sin(k*.9)*1.3:0),li,k})});
-const nodes=new THREE.InstancedMesh(new THREE.SphereGeometry(.17,24,16),glowify(new THREE.MeshPhysicalMaterial({metalness:.6,roughness:.2,clearcoat:1}),.25,1.2),ND.length);g5.add(nodes);
+/* ================= STAGE 5 · FEED-FORWARD: your question in, 16 real neurons, 8 projects out ================= */
+const g5=group(5);
+const LSZ=[8,16,8],ND=[];LSZ.forEach((n,li)=>{for(let k=0;k<n;k++)ND.push({p:new THREE.Vector3((li-1)*5.6-1.2,((n-1)/2-k)*(li===1?.56:.95),li===1?Math.sin(k*.9)*1.1:0),li,k})});
+const nodes=new THREE.InstancedMesh(new THREE.SphereGeometry(.2,28,20),glowify(new THREE.MeshPhysicalMaterial({metalness:.25,roughness:.16,clearcoat:1,clearcoatRoughness:.04}),.28,.75),ND.length);g5.add(nodes);
 ND.forEach((n,i)=>{tmp.position.copy(n.p);tmp.rotation.set(0,0,0);tmp.scale.setScalar(1);tmp.updateMatrix();nodes.setMatrixAt(i,tmp.matrix);nodes.setColorAt(i,col.set(0x8b70ff))});
 const EDG=[];ND.forEach((a,i)=>ND.forEach((b,j)=>{if(b.li===a.li+1)EDG.push([i,j])}));
-const ep=new Float32Array(EDG.length*6);EDG.forEach(([i,j],k)=>ep.set([ND[i].p.x,ND[i].p.y,ND[i].p.z,ND[j].p.x,ND[j].p.y,ND[j].p.z],k*6));
-const eg=new THREE.BufferGeometry();eg.setAttribute('position',new THREE.BufferAttribute(ep,3));const edl=new THREE.LineSegments(eg,new THREE.LineBasicMaterial({color:0x7a5cff,transparent:true,opacity:.16,depthWrite:false}));edl.layers.set(2);g5.add(edl);
-const NPU=MOB?50:110,pul=[...Array(NPU)].map(()=>({e:Math.floor(Math.random()*EDG.length),u:Math.random(),s:.35+Math.random()*.6})),pp5=new Float32Array(NPU*3),pg5=new THREE.BufferGeometry();pg5.setAttribute('position',new THREE.BufferAttribute(pp5,3));
-const pts5=new THREE.Points(pg5,new THREE.PointsMaterial({size:.3,color:new THREE.Color(0xc6ff3d).multiplyScalar(2.2),transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));pts5.layers.set(2);g5.add(pts5);
-const NG=new Float32Array(ND.length),PJ=['PARRY','HelaLM','CashSage-4B','Secret Loyalties','AgriReason-4B','Gemma 4 Agent','Multimodal','PPO drone'],OUT0=ND.findIndex(n=>n.li===2),HID0=ND.findIndex(n=>n.li===1);let n5hot=-1,NA=new Float32Array(16);
-PJ.forEach((name,k)=>{const n=ND[OUT0+k],s=label(name,{size:34,color:'#d0d0de',scale:.36});s.position.set(n.p.x+.55+s.scale.x/2,n.p.y,0);g5.add(s);
- const hit=new THREE.Mesh(new THREE.SphereGeometry(.5,8,6),new THREE.MeshBasicMaterial({visible:false}));hit.position.copy(n.p);g5.add(hit);
- HOT.push({o:hit,st:5,id:'j'+k,tip:()=>`neuron ${k} → <b>${name}</b><br><span class="small">click to open</span>`,on:h=>{n5hot=h?k:-1;$$('#proj div')[k].classList.toggle('hot',h)},click:()=>card('j'+k)})});
-function build5(r){const a=r.sep.act[r.sep.act.length-1],ord=[...a].map((v,i)=>[Math.abs(v),i]).sort((x,y)=>y[0]-x[0]).slice(0,16),mx=ord[0][0]||1;NA=Float32Array.from(ord.map(x=>x[0]/mx))}
-function upd5(t,dt){pul.forEach((q,k)=>{q.u+=q.s*dt;if(q.u>=1){NG[EDG[q.e][1]]=1;const nx=[];for(let i=0;i<EDG.length;i++)if(EDG[i][0]===EDG[q.e][1])nx.push(i);q.e=nx.length?nx[Math.floor(Math.random()*nx.length)]:Math.floor(Math.random()*64);q.u=0}
-  const[i,j]=EDG[q.e];pp5[k*3]=ND[i].p.x+(ND[j].p.x-ND[i].p.x)*q.u;pp5[k*3+1]=ND[i].p.y+(ND[j].p.y-ND[i].p.y)*q.u;pp5[k*3+2]=ND[i].p.z+(ND[j].p.z-ND[i].p.z)*q.u});pg5.attributes.position.needsUpdate=true;
- const hk=n5hot>=0?n5hot:(hoverCard&&hoverCard[0]==='j'?+hoverCard.slice(1):-1);
- for(let i=0;i<ND.length;i++){NG[i]*=.93;const isH=hk>=0&&i===OUT0+hk,hid=ND[i].li===1?NA[i-HID0]*(.85+.15*Math.sin(t*3+i)):0;
-  nodes.setColorAt(i,col.set(0x8b70ff).lerp(LIME,Math.max(NG[i],isH?1:0,hid)).multiplyScalar(1+NG[i]*1.6+(isH?2.4:0)+hid*2.2));
-  if(isH||ND[i].li>=1){tmp.position.copy(ND[i].p);tmp.rotation.set(0,0,0);tmp.scale.setScalar(isH?2.1:(ND[i].li===1?.7+hid*.9:1.25));tmp.updateMatrix();nodes.setMatrixAt(i,tmp.matrix)}}
+const ep=new Float32Array(EDG.length*6),ec5=new Float32Array(EDG.length*6),EA=new Float32Array(EDG.length);EDG.forEach(([i,j],k)=>ep.set([ND[i].p.x,ND[i].p.y,ND[i].p.z,ND[j].p.x,ND[j].p.y,ND[j].p.z],k*6));
+const eg=new THREE.BufferGeometry();eg.setAttribute('position',new THREE.BufferAttribute(ep,3));eg.setAttribute('color',new THREE.BufferAttribute(ec5,3));
+const edl=new THREE.LineSegments(eg,new THREE.LineBasicMaterial({vertexColors:true,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));edl.layers.set(2);g5.add(edl);
+const NPU=MOB?50:90,TRL=6,pul=[...Array(NPU)].map(()=>({e:Math.floor(Math.random()*EDG.length),u:Math.random(),s:.45+Math.random()*.6})),pp5=new Float32Array(NPU*TRL*3),pc5=new Float32Array(NPU*TRL*3),pg5=new THREE.BufferGeometry();
+pg5.setAttribute('position',new THREE.BufferAttribute(pp5,3));pg5.setAttribute('color',new THREE.BufferAttribute(pc5,3));
+const pts5=new THREE.Points(pg5,new THREE.PointsMaterial({size:.2,vertexColors:true,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));pts5.layers.set(2);g5.add(pts5);
+const NG=new Float32Array(ND.length),PJ=[['PARRY','1st of 946'],['HelaLM','1st · 92% win rate'],['CashSage-4B','2nd · finance'],['Secret Loyalties','17 models audited'],['AgriReason-4B','open model + data'],['Gemma 4 Agent','Kaggle · in progress'],['Multimodal','audio + vision'],['PPO drone','deep RL']],OUT0=ND.findIndex(n=>n.li===2),HID0=ND.findIndex(n=>n.li===1);let n5hot=-1,n5auto=-1,n5t=0,NA=new Float32Array(16),IN5=[];
+const PJL=PJ.map(([name,tag],k)=>{const n=ND[OUT0+k],s=label(`${name}  ↗`,{size:36,color:'#f4f4f6',scale:.5,bg:'rgba(14,12,30,.92)'}),t=label(tag,{size:26,color:'#b4b4c8',scale:.33});s.position.set(n.p.x+.62+s.scale.x/2,n.p.y+.1,0);t.position.set(n.p.x+.62+t.scale.x/2+.14,n.p.y-.38,0);g5.add(s,t);
+ const ring=new THREE.Mesh(new THREE.TorusGeometry(.38,.018,8,48),new THREE.MeshBasicMaterial({color:new THREE.Color(0xc6ff3d).multiplyScalar(1.1),transparent:true,opacity:.5,depthWrite:false,blending:THREE.AdditiveBlending}));ring.position.copy(n.p);ring.layers.set(2);g5.add(ring);
+ const hit=new THREE.Mesh(new THREE.SphereGeometry(.55,8,6),new THREE.MeshBasicMaterial({visible:false}));hit.position.copy(n.p);g5.add(hit);
+ const h={o:hit,st:5,id:'j'+k,tip:()=>`<b>${esc(name)}</b> · ${esc(tag)}<br><span class="small">click to open the project</span>`,on:on=>{n5hot=on?k:-1;n5t=0;$$('#proj div')[k].classList.toggle('hot',on)},click:()=>card('j'+k)};HOT.push(h,{...h,o:s});return{s,t,ring,sx:s.scale.x}});
+[['your question',ND[0].p.x],['16 of 256 real neurons',ND[HID0].p.x],['8 projects',ND[OUT0].p.x]].forEach(([t,x],i)=>{const l=label(t,{size:28,color:'#8f8fa8',scale:.32});l.position.set(x+(i===2?1.6:0),-4.75,0);g5.add(l)});
+function build5(r){const a=r.sep.act[r.sep.act.length-1],ord=[...a].map((v,i)=>[Math.abs(v),i]).sort((x,y)=>y[0]-x[0]).slice(0,16),mx=ord[0][0]||1;NA=Float32Array.from(ord.map(x=>x[0]/mx));
+ IN5.forEach(dispose);const tk=['<s>',...r.toks.map(t=>t.w),'<a>'].slice(0,8);IN5=tk.map((w,k)=>{const n=ND[k],l=label(w,{size:30,color:'#d9d3ff',scale:.36,bg:'rgba(30,20,70,.85)'});l.position.set(n.p.x-.5-l.scale.x/2,n.p.y,0);g5.add(l);return l})}
+function upd5(t,dt){const ntk=Math.max(1,IN5.length);
+ pul.forEach((q,k)=>{q.u+=q.s*dt;EA[q.e]=Math.max(EA[q.e],1);if(q.u>=1){NG[EDG[q.e][1]]=1;const nx=[];for(let i=0;i<EDG.length;i++)if(EDG[i][0]===EDG[q.e][1])nx.push(i);
+   if(nx.length)q.e=nx[Math.floor(Math.random()*nx.length)];else{const s0=Math.floor(Math.random()*ntk);const c=[];for(let i=0;i<EDG.length;i++)if(EDG[i][0]===s0)c.push(i);q.e=c[Math.floor(Math.random()*c.length)]}q.u=0}
+  const[i,j]=EDG[q.e],A=ND[i].p,B=ND[j].p;for(let m=0;m<TRL;m++){const u=Math.max(0,q.u-m*.035),o=(k*TRL+m)*3,f=1-m/TRL;pp5[o]=A.x+(B.x-A.x)*u;pp5[o+1]=A.y+(B.y-A.y)*u;pp5[o+2]=A.z+(B.z-A.z)*u;pc5[o]=.78*1.15*f*f;pc5[o+1]=1.15*f*f;pc5[o+2]=.24*1.15*f*f}});
+ pg5.attributes.position.needsUpdate=true;pg5.attributes.color.needsUpdate=true;
+ for(let k=0;k<EDG.length;k++){EA[k]*=Math.pow(.25,dt);const[i,j]=EDG[k],hid=ND[j].li===1?NA[j-HID0]:(ND[i].li===1?NA[i-HID0]*.6:0),src=ND[i].li===0&&ND[i].k>=ntk?.35:1,a=EA[k];
+  col.copy(VIO).multiplyScalar((.06+hid*.12)*src).lerp(LIME,Math.min(1,a*.55)).multiplyScalar(1+a*.35);ec5.set([col.r,col.g,col.b,col.r,col.g,col.b],k*6)}eg.attributes.color.needsUpdate=true;
+ if(n5hot<0&&!(hoverCard&&hoverCard[0]==='j')&&Math.abs(pC-5)<.3){n5t+=dt;if(n5t>1.15){n5t=0;n5auto=(n5auto+1)%8}}else if(n5hot>=0)n5auto=-1;
+ const hk=n5hot>=0?n5hot:(hoverCard&&hoverCard[0]==='j'?+hoverCard.slice(1):n5auto);
+ for(let i=0;i<ND.length;i++){NG[i]*=Math.pow(.02,dt);const L=ND[i].li,isH=hk>=0&&i===OUT0+hk,hid=L===1?NA[i-HID0]*(.85+.15*Math.sin(t*3+i)):0,inA=L===0&&ND[i].k<ntk?1:0;
+  col.set(L===0?0x9d86ff:0x8b70ff).lerp(LIME,Math.max(NG[i]*.6,isH?1:0,hid*.8,L===2?.35:0)).multiplyScalar(.62+NG[i]*.55+(isH?1.25:0)+hid*.75+(L===2?.18:0)+inA*.22);nodes.setColorAt(i,col);
+  tmp.position.copy(ND[i].p);tmp.rotation.set(0,0,0);tmp.scale.setScalar(isH?1.9:(L===1?.7+hid*.7:L===2?1.3:(inA?1.05:.8)));tmp.updateMatrix();nodes.setMatrixAt(i,tmp.matrix)}
+ PJL.forEach((l,k)=>{const on=k===hk,pl=Math.sin(t*2.4-k*.7)*.5+.5;l.ring.scale.setScalar(1+pl*.3+(on?.7:0));l.ring.material.opacity=.1+pl*.18+(on?.45:0);const sc=on?1.12:1;l.s.scale.set(l.sx*sc,.5*sc,1)});
  nodes.instanceColor.needsUpdate=true;nodes.instanceMatrix.needsUpdate=true}
 
-/* ================= STAGE 6 · RESIDUAL STREAM: liquid-glass layers glowing with the real residual norm ================= */
-const g6=group(6);sub(g6,'x + f(x) · glow = real ‖x‖ after each block · hover a layer',6.6);
-const SLAB=new THREE.BoxGeometry(13,.16,7),slabs=[];let SN=[1,1,1,1],NL=[];
-[['L0 · EARLY SWE','e0'],['L1 · PLUGINLIVE','e1'],['L2 · CEQUENCE','e2'],['L3 · AMII','e3']].forEach(([n,id],i)=>{const y=-4.2+i*2.8,pl=asGlass(new THREE.Mesh(SLAB,glassMat({ior:.07,rip:1.6,tint:[1.05,1.07,1.15],rim:[.3,.34,.6],alpha:.58})));pl.userData.shared=1;pl.position.y=y;g6.add(pl);
- const ed=new THREE.LineSegments(new THREE.EdgesGeometry(SLAB),new THREE.LineBasicMaterial({color:new THREE.Color(0xc6ff3d).multiplyScalar(1.3),transparent:true,opacity:.5}));ed.position.y=y;ed.layers.set(2);g6.add(ed);
- const l=label(n,{size:46,color:'#c6ff3d',scale:.55});l.position.set(-4.3,y+.45,3.8);g6.add(l);
- const o={pl,ed,hv:0,id,on:false};slabs.push(o);HOT.push({o:pl,st:6,id,tip:()=>`<b>${n}</b> · ‖x‖ = ${SN[i].toFixed(2)}<br><span class="small">click for details</span>`,on:h=>{o.on=h;$$('#exp li')[3-i].classList.toggle('hot',h)},click:()=>card(id)})});
-function build6(r){SN=r.sep.nrm.slice(0,4);NL.forEach(dispose);NL=SN.map((v,i)=>{const l=label('‖x‖ '+v.toFixed(1),{size:30,color:'#d0d0de',scale:.34});l.position.set(5.6,-4.2+i*2.8+.45,3.6);g6.add(l);return l})}
-const RN=MOB?900:2200,rs6=[...Array(RN)].map(()=>({y:Math.random()*12-6,a:Math.random()*6.28,r:Math.random()*1.6,s:.8+Math.random()*1.6})),rp6=new Float32Array(RN*3),rc6=new Float32Array(RN*3),rg6=new THREE.BufferGeometry();
-rg6.setAttribute('position',new THREE.BufferAttribute(rp6,3));rg6.setAttribute('color',new THREE.BufferAttribute(rc6,3));const sp6=new THREE.Points(rg6,new THREE.PointsMaterial({size:.13,vertexColors:true,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));sp6.layers.set(2);g6.add(sp6);
-function upd6(t,dt){const sm=Math.max(...SN);rs6.forEach((q,k)=>{q.y+=q.s*dt*1.6;if(q.y>6)q.y=-6;q.a+=dt*.9;const li=Math.max(0,Math.min(3,Math.floor((q.y+5.6)/2.8))),r=q.r*(1+.4*Math.sin(q.y))*(.55+.6*SN[li]/sm);rp6[k*3]=Math.cos(q.a+q.y*.6)*r;rp6[k*3+1]=q.y;rp6[k*3+2]=Math.sin(q.a+q.y*.6)*r;col.setHSL(.74-(q.y+6)/12*.47,.95,.55).multiplyScalar(1.5);rc6[k*3]=col.r;rc6[k*3+1]=col.g;rc6[k*3+2]=col.b});rg6.attributes.position.needsUpdate=true;rg6.attributes.color.needsUpdate=true;
- slabs.forEach((s,i)=>{s.hv+=((s.on||hoverCard===s.id?1:0)-s.hv)*(1-Math.exp(-dt*10));const nv=SN[i]/sm;s.pl.material.uniforms.hl.value=s.hv*1.4+nv*.35;s.pl.material.uniforms.glow.value=s.hv*.12+nv*.1;s.ed.material.opacity=.35+nv*.35+s.hv*.3;s.ed.material.color.copy(LIME).multiplyScalar(.8+nv*1.1+s.hv*2)})}
+/* ================= STAGE 6 · RESIDUAL STREAM: one stream of light, four roles, each ring adding to the last ================= */
+const g6=group(6);ORIENT[6]=[];
+const PL=[['L0 · EARLY · 2021–23','Three engineering roles','Digikentro · STERP Software · Absolute Web','e0'],['L1 · PLUGINLIVE · 2023–24','60,000 docs at once','95% extraction · ~70% faster · led 12–15 engineers','e1'],['L2 · CEQUENCE · 2025','−40% investigation time','+30% throughput · ~half the monitoring cost · on-call','e2'],['L3 · AMII · 2025 →','Models in production','retrieval & ranking · RLHF · agents · A/B tests','e3']];
+function stepCanvas(k,big,line){const c=document.createElement('canvas');c.width=1400;c.height=430;const g=c.getContext('2d'),r=46;
+ g.beginPath();g.moveTo(r,4);g.arcTo(1396,4,1396,426,r);g.arcTo(1396,426,4,426,r);g.arcTo(4,426,4,4,r);g.arcTo(4,4,1396,4,r);g.closePath();g.fillStyle='rgba(10,9,22,.84)';g.fill();
+ const grd=g.createLinearGradient(0,0,1400,430);grd.addColorStop(0,'rgba(255,255,255,.15)');grd.addColorStop(.55,'rgba(255,255,255,.04)');grd.addColorStop(1,'rgba(255,255,255,.09)');g.fillStyle=grd;g.fill();g.lineWidth=3;g.strokeStyle='rgba(198,255,61,.5)';g.stroke();
+ g.fillStyle='#c6ff3d';g.fillRect(30,64,8,302);g.font='800 46px ui-monospace,SFMono-Regular,Menlo,monospace';g.fillText(k,70,104);
+ g.fillStyle='#ffffff';fitFont(g,big,118,'italic 400 FSpx "Instrument Serif",Georgia,serif');g.shadowColor='rgba(198,255,61,.45)';g.shadowBlur=30;g.fillText(big,64,236);g.shadowBlur=0;
+ g.fillStyle='#d2d2e2';fitFont(g,line,44,'600 FSpx ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif');if(g.measureText(line).width>1290)g.font='600 38px ui-sans-serif,system-ui,sans-serif';g.fillText(line,70,322);
+ g.fillStyle='#c6ff3d';g.font='700 30px ui-monospace,SFMono-Regular,Menlo,monospace';g.fillText('click for the story ↗',70,392);return c}
+const CX6=MOB?0:0,RY6=i=>(MOB?-6.4:-2.9)+i*(MOB?4.1:2.15),slabs=[];let SN=[1,1,1,1];
+const beam=new THREE.Mesh(new THREE.CylinderGeometry(.045,.045,MOB?17:11,10),new THREE.MeshBasicMaterial({color:new THREE.Color(0xd8ffa0).multiplyScalar(3)}));beam.position.set(CX6,MOB?-.3:.1,0);beam.layers.set(2);g6.add(beam);
+const beamG=new THREE.Mesh(new THREE.CylinderGeometry(.28,.28,MOB?17:11,24,1,true),new THREE.MeshBasicMaterial({color:new THREE.Color(0xc6ff3d).multiplyScalar(.5),transparent:true,opacity:.35,depthWrite:false,blending:THREE.AdditiveBlending,side:THREE.DoubleSide}));beamG.position.copy(beam.position);beamG.layers.set(2);g6.add(beamG);
+const wave6=new THREE.Mesh(new THREE.SphereGeometry(.22,20,14),new THREE.MeshBasicMaterial({color:new THREE.Color(0xf4ffd8).multiplyScalar(6)}));wave6.layers.set(2);g6.add(wave6);
+PL.forEach(([k,big,line,id],i)=>{const y=RY6(i),rg=new THREE.Group();rg.position.set(CX6,y,0);rg.rotation.x=Math.PI/2-.42;g6.add(rg);
+ const ring=new THREE.Mesh(new THREE.TorusGeometry(1,.075,24,120),new THREE.MeshPhysicalMaterial({color:0xc6ff3d,emissive:0xc6ff3d,emissiveIntensity:.5,metalness:1,roughness:.12,clearcoat:1,clearcoatRoughness:.05}));
+ const glow=new THREE.Mesh(new THREE.TorusGeometry(1,.02,8,120),new THREE.MeshBasicMaterial({color:new THREE.Color(0xc6ff3d).multiplyScalar(2.2),transparent:true,opacity:.6,depthWrite:false,blending:THREE.AdditiveBlending}));glow.layers.set(2);
+ const disc=new THREE.Mesh(new THREE.CircleGeometry(1,64),new THREE.MeshBasicMaterial({color:new THREE.Color(0x7a5cff).multiplyScalar(.5),transparent:true,opacity:.12,depthWrite:false,blending:THREE.AdditiveBlending,side:THREE.DoubleSide}));disc.layers.set(2);rg.add(ring,glow,disc);
+ const plus=label('+',{size:60,color:'#c6ff3d',scale:.62});plus.position.set(CX6+(MOB?-2.4:-2.7),y,0);g6.add(plus);
+ const cw=MOB?5.4:6.9,cd=textPlane(stepCanvas(k,big,line),cw);cd.position.set(MOB?CX6:CX6+2.7+cw/2,MOB?y-1.95:y,MOB?.4:0);g6.add(cd);ORIENT[6].push(cd);
+ if(!MOB){const lg=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(CX6+1.3,y,0),new THREE.Vector3(CX6+2.7,y,0)]),cl6=new THREE.Line(lg,new THREE.LineBasicMaterial({color:0xc6ff3d,transparent:true,opacity:.55}));cl6.layers.set(2);g6.add(cl6)}
+ const hit=new THREE.Mesh(new THREE.CylinderGeometry(2,2,.9,16),new THREE.MeshBasicMaterial({visible:false}));hit.position.set(CX6,y,0);g6.add(hit);
+ const o={rg,ring,glow,disc,cd,plus,hv:0,id,on:false,fl:0,r:1};slabs.push(o);const h={o:hit,st:6,id,tip:()=>`<b>${esc(k)}</b><br><span class="small">${esc(big)} · ring size = the real ‖x‖ after this block · click for the story</span>`,on:hh=>{o.on=hh;$$('#exp li')[3-i].classList.toggle('hot',hh)},click:()=>card(id)};HOT.push(h,{...h,o:cd})});
+function build6(r){SN=r.sep.nrm.slice(0,4);const mx=Math.max(...SN),mn=Math.min(...SN);slabs.forEach((s,i)=>{s.r=(MOB?.75:.85)+(SN[i]-mn)/(mx-mn||1)*(MOB?.75:1.05)})}
+const RN=MOB?900:2200,rs6=[...Array(RN)].map(()=>({y:Math.random()*11-5.5,a:Math.random()*6.28,r:Math.random(),s:.6+Math.random()*1.4})),rp6=new Float32Array(RN*3),rc6=new Float32Array(RN*3),rg6=new THREE.BufferGeometry();
+rg6.setAttribute('position',new THREE.BufferAttribute(rp6,3));rg6.setAttribute('color',new THREE.BufferAttribute(rc6,3));const sp6=new THREE.Points(rg6,new THREE.PointsMaterial({size:.11,vertexColors:true,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));sp6.layers.set(2);g6.add(sp6);
+function upd6(t,dt){const arr=Math.abs(pC-6)<.4,H=MOB?8.5:5.5,wy=((t*.42)%1)*(2*H+2)-H-1;wave6.position.set(CX6,wy,0);wave6.scale.setScalar(1+Math.sin(t*9)*.15);
+ rs6.forEach((q,k)=>{q.y+=q.s*dt*1.4;if(q.y>H)q.y=-H;q.a+=dt*(.7+q.r);const lv=cl((q.y-RY6(0)+1.2)/(RY6(3)-RY6(0)+1.2)),rr=(.15+q.r*(.35+lv*1.35))*(MOB?.8:1);
+  rp6[k*3]=CX6+Math.cos(q.a)*rr;rp6[k*3+1]=q.y;rp6[k*3+2]=Math.sin(q.a)*rr*.8;col.setHSL(.74-lv*.47,.95,.58).multiplyScalar(1.1+lv*.9);rc6[k*3]=col.r;rc6[k*3+1]=col.g;rc6[k*3+2]=col.b});rg6.attributes.position.needsUpdate=true;rg6.attributes.color.needsUpdate=true;
+ slabs.forEach((s,i)=>{s.hv+=((s.on||hoverCard===s.id?1:0)-s.hv)*(1-Math.exp(-dt*10));const hitW=Math.exp(-Math.pow((wy-RY6(i))*1.6,2));s.fl=Math.max(s.fl*Math.pow(.15,dt),hitW);
+  const R=s.r*(1+s.hv*.08+s.fl*.06);s.rg.scale.setScalar(R);s.rg.rotation.z=t*.25*(i%2?1:-1);s.ring.material.emissiveIntensity=.45+s.fl*2.2+s.hv*1.8;s.glow.material.opacity=.35+s.fl*.6+s.hv*.4;s.disc.material.opacity=.08+s.fl*.18+s.hv*.15;
+  s.plus.material.opacity=.5+s.fl*.5;s.cd.scale.setScalar(1+s.hv*.04);const u=s.cd.material.uniforms;u.uRev.value+=((arr?1:0)-u.uRev.value)*(1-Math.exp(-dt*(arr?2.6-i*.4:8)))})}
 
 /* ================= STAGE 7 · OUTPUT: the real next-token distribution for your question, decoded into a person ================= */
-const g7=group(7);const s7=sub(g7,'softmax · next token · log scale · real probabilities',MOB?7.0:5.4);
+const g7=group(7);
 const pfmt=p=>p>.9999?`1 − ${(1-p).toExponential(1)}`:p<1e-3?p.toExponential(1):p.toFixed(4);
 const OX0=MOB?0:2.7,OSP=MOB?.95:1.15,OX=i=>OX0+(i?(i%2?1:-1)*Math.ceil(i/2):0)*OSP,OZ=i=>-Math.ceil(i/2)*.3,BY=MOB?-4.2:-2.6,bh=p=>.2+6*Math.max(0,1+Math.log10(Math.max(p,1e-9))/8);
 const ob=new THREE.InstancedMesh(new THREE.BoxGeometry(.8,1,.8),glowify(new THREE.MeshPhysicalMaterial({metalness:.8,roughness:.18,clearcoat:1}),.12,.9),9);g7.add(ob);
@@ -730,7 +808,7 @@ if(PORTRAIT){const raw=atob(PORTRAIT.d),N=PORTRAIT.n,HH=MOB?5.8:9.4,WW=HH*PORTRA
  por={pts,u,plane:new THREE.Plane()};HOT.push({o:hit,st:7,id:'me',tip:()=>`<b>the decoded output</b><br><span class="small">${N.toLocaleString('en-US')} particles of me · click to say hi</span>`,click:()=>card('me')})}
 
 /* ================= chapter titles: film-title type in the world, revealed as you arrive ================= */
-const SUBS=[null,'real embedding rows for your question','learned positional embedding · real','softmax(QKᵀ/√d)·V · real attention','4 heads · click a ring','GELU(xW₁)W₂ · real activations','x + f(x) · real residual norms','softmax · real probabilities'];
+const SUBS=[null,'skills as an embedding space · related skills sit close','positional encoding · positions in time','softmax(QKᵀ/√d)·V · real attention on your question','4 heads · 4 hackathon prizes, all in 2026','GELU(xW₁)W₂ · 8 output neurons = 8 projects','x + f(x) · what each role added, in numbers','softmax · real next-token probabilities'];
 const TITLES=STG.map((s,i)=>i?textPlane(chapterCanvas(s.k,s.t,SUBS[i]),10):null);TITLES.forEach(t=>t&&scene.add(t));
 
 /* ================= the visitor's question drives every layer ================= */
@@ -738,14 +816,21 @@ FX.applyQ=r=>{if(!r||!M)return;QR=r;build1(r);build2(r);build3(r);build4(r);buil
 if(M)FX.applyQ(QR);
 
 /* ================= the director: composed holds, designed transitions (bezier path, roll, lens), letterbox ================= */
-const HOLD_D=[[[0,.9,18],[0,.15,0],46],[[-8,6,16],[-.6,-.4,0],46,[-.9,.74,.4]],[[9,4.2,15.5],[-3.5,-.6,0],48,[-.9,.74,.4]],[[1,2.3,17.5],[1.2,.9,0],46,[-.9,.74,.4]],[[-2,-1.5,18.5],[0,.4,0],50,[-.9,.74,.4]],[[3,2.2,19],[1.4,.3,0],46,[-.9,.74,.4]],[[1.5,9.5,15],[0,1.2,0],50,[-.9,.74,.4]],[[-2.5,2.4,21],[-1,1.2,0],46,[.04,.74,.42]]];
-const HOLD=MOB?HOLD_D.map((h,i)=>[[h[0][0]*.4,h[0][1]+1,h[0][2]*1.55],[h[1][0]*.3,i?h[1][1]-1.2:-2.4,h[1][2]],62,[-.92,.78,.86]]):HOLD_D;
+const HOLD_D=[[[0,.9,18],[0,.15,0],46],[[0,3.4,21.5],[1.4,.2,0],50,[-.9,.74,.4]],[[0,1.4,21.5],[0,.1,0],54,[-.9,.74,.4]],[[-1,2.3,18.5],[-3.4,.1,0],46,[-.9,.74,.4]],[[-1,.4,20.5],[0,-.3,0],50,[-.9,.74,.46]],[[2.5,1.6,20],[1.4,-.75,0],46,[-.9,.74,.4]],[[.6,2.1,20.5],[1.2,1.05,0],50,[-.9,.74,.4]],[[-2.5,2.4,21],[-1,1.2,0],46,[.04,.74,.42]]];
+const HOLD_M={1:[[0,1.2,26],[0,.4,0],64],2:[[0,0,27],[0,-.6,0],64],4:[[0,0,27],[0,-1.4,0],64],6:[[0,0,30],[0,-.6,0],64]};
+const HOLD=MOB?HOLD_D.map((h,i)=>[...(HOLD_M[i]||[[h[0][0]*.4,h[0][1]+1,h[0][2]*1.55],[h[1][0]*.3,i?h[1][1]-1.2:-2.4,h[1][2]],62]),[-.92,.78,.86]]):HOLD_D;
 const TR=[{m:[7,5,4],r:-7,f:8},{m:[-6,3,0],r:6,f:6},{m:[0,10,2],r:0,f:10},{m:[0,4,16],r:0,f:12},{m:[12,-2,2],r:-9,f:6},{m:[-6,12,0],r:5,f:12},{m:[0,3,12],r:0,f:6}];
 const look=new THREE.Vector3(),hp=i=>[new THREE.Vector3(HOLD[i][0][0],HOLD[i][0][1],Z(i)+HOLD[i][0][2]),new THREE.Vector3(HOLD[i][1][0],HOLD[i][1][1],Z(i)+HOLD[i][1][2]),HOLD[i][2]];
 let baseFov=46,barsT=0;
 const ss=f=>f*f*f*(f*(f*6-15)+10),eo=f=>1-Math.pow(1-f,4),eio=f=>f<.5?4*f*f*f:1-Math.pow(-2*f+2,3)/2,cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
 const bez=(A,B,C,e,out)=>{const u=1-e;return out.set(u*u*A.x+2*u*e*B.x+e*e*C.x,u*u*A.y+2*u*e*B.y+e*e*C.y,u*u*A.z+2*u*e*B.z+e*e*C.z)};
-function camAt(p,t,mx,my){const i=Math.min(NS-2,Math.floor(p)),f=Math.min(1,p-i),e=ss(f),s=Math.sin(Math.PI*e),[A,LA,FA]=hp(i),[B,LB,FB]=hp(i+1),tr=TR[i];
+const stOf=p=>((Math.round(p)%8)+8)%8;
+/* the loop: past the last layer, fly forward into the light and come out behind the opening frame, still moving forward */
+function loopCam(p,t,mx,my){const[A,LA,FA]=hp(7),[H0,L0,F0]=hp(0),U=compM.uniforms;let e,k;
+ if(p<7.5){const f=cl((p-7)/.5);e=f*f*f;k=1-f;cam.position.lerpVectors(A,new THREE.Vector3(-1.4,1.7,Z(7)-70),e);look.lerpVectors(LA,new THREE.Vector3(-.6,1.2,Z(7)-150),Math.min(1,f*1.5));baseFov=FA+34*e;barsT=cl(f*3);U.uFlash.value=Math.pow(cl((f-.3)/.7),2)*1.7}
+ else{const f=cl((p-7.5)/.5);e=1-Math.pow(1-f,3);k=f;cam.position.lerpVectors(new THREE.Vector3(0,3.4,105),H0,e);look.lerpVectors(new THREE.Vector3(0,1.8,0),L0,e);baseFov=F0+28*(1-e);barsT=cl((1-f)*3);U.uFlash.value=Math.pow(1-cl(f/.6),2)*1.7}
+ cam.position.x+=mx*1.1*k;cam.position.y+=my*.7*k;cam.lookAt(look);limeL.position.set(look.x+4,look.y+5,look.z+6);vioL.position.set(look.x-7,look.y-2,look.z+5)}
+function camAt(p,t,mx,my){if(p>7||p<0){loopCam(p<0?p+8:p,t,mx,my);return}compM.uniforms.uFlash.value=0;const i=Math.min(NS-2,Math.floor(p)),f=Math.min(1,p-i),e=ss(f),s=Math.sin(Math.PI*e),[A,LA,FA]=hp(i),[B,LB,FB]=hp(i+1),tr=TR[i];
  const mid=A.clone().add(B).multiplyScalar(.5).add(new THREE.Vector3(...tr.m));bez(A,mid,B,e,cam.position);look.lerpVectors(LA,LB,e);
  cam.position.x+=mx*1.1+(RM?0:Math.sin(t*.22)*.3);cam.position.y+=my*.7;cam.lookAt(look);cam.rotateZ(tr.r*s*Math.PI/180);
  baseFov=FA+(FB-FA)*e+tr.f*s;barsT=cl((Math.min(f,1-f)-.05)/.18);limeL.position.set(look.x+4,look.y+5,look.z+6);vioL.position.set(look.x-7,look.y-2,look.z+5)}
@@ -753,7 +838,7 @@ function camAt(p,t,mx,my){const i=Math.min(NS-2,Math.floor(p)),f=Math.min(1,p-i)
 const tc=new THREE.PerspectiveCamera();
 function placeTitles(){TITLES.forEach((T,i)=>{if(!T)return;const[A,LA,F]=hp(i),an=HOLD[i][3];tc.position.copy(A);tc.lookAt(LA);tc.updateMatrixWorld();const dist=13,hh=Math.tan(F*Math.PI/360)*dist,hw=hh*innerWidth/innerHeight,W=an[2]*2*hw,H=W*470/2048;
  const fw=new THREE.Vector3(0,0,-1).applyQuaternion(tc.quaternion),rt=new THREE.Vector3(1,0,0).applyQuaternion(tc.quaternion),up=new THREE.Vector3(0,1,0).applyQuaternion(tc.quaternion);
- T.position.copy(A).addScaledVector(fw,dist).addScaledVector(rt,an[0]*hw+W/2).addScaledVector(up,an[1]*hh-H/2);T.quaternion.copy(tc.quaternion);T.scale.setScalar(W/10)})}
+ T.position.copy(A).addScaledVector(fw,dist).addScaledVector(rt,an[0]*hw+W/2).addScaledVector(up,an[1]*hh-H/2);T.quaternion.copy(tc.quaternion);T.scale.setScalar(W/10);(ORIENT[i]||[]).forEach(o=>o.quaternion.copy(tc.quaternion))})}
 
 /* ================= the intro: a question typed into the dark, the whole network revealed, a forward pass, and the answer built from the model's own weights ================= */
 const pcv=document.createElement('canvas');pcv.width=1600;pcv.height=220;const pg=pcv.getContext('2d'),pTex=new THREE.CanvasTexture(pcv);
@@ -792,26 +877,28 @@ canvas.addEventListener('click',()=>{if(STARTED&&!introDone&&intro>.5)endIntro()
 let pT=0,pC=0,pV=0,mx=0,my=0,pmx=0,pmy=0,lastMove=-9;
 const rail=$('#rail');STN_init();function STN_init(){['INPUT','EMBEDDING','POSITIONAL','ATTENTION','MULTI-HEAD','FEED-FORWARD','RESIDUAL','OUTPUT'].forEach((n,i)=>{const a=document.createElement('a');a.href='#';a.innerHTML=`${n}<i></i>`;a.onclick=e=>{e.preventDefault();go(i)};rail.appendChild(a)})}
 const railA=[...rail.children];
-function readScroll(){const m=Math.max(1,document.documentElement.scrollHeight-innerHeight);pT=Math.min(NS-1,Math.max(0,scrollY/m*(NS-1)))}
+function readScroll(){const m=Math.max(1,document.documentElement.scrollHeight-innerHeight);pT=Math.min(8,Math.max(0,scrollY/m*8))}
 let snapT=0;addEventListener('scroll',()=>{if(FILM)return;readScroll();clearTimeout(snapT);if(introDone)snapT=setTimeout(()=>{const r=Math.round(pT);if(Math.abs(pT-r)>.03&&Math.abs(pT-r)<.42)go(r)},280)},{passive:true});
 addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;mx=e.clientX/innerWidth-.5;my=-(e.clientY/innerHeight-.5);pmx=e.clientX;pmy=e.clientY;mNDC.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1);lastMove=T;lightPos(e.clientX,e.clientY)},{passive:true});
 let lastSt=-1,capSt=-1;
-function updUI(){const st=Math.round(pC),settled=introDone&&Math.abs(pC-st)<.24;
+function updUI(){const r0=Math.round(pC),st=stOf(pC),settled=introDone&&Math.abs(pC-r0)<.24;
  $('#hero').classList.toggle('on',introDone&&pC<.35&&!FILM);
  if(st!==lastSt){if(lastSt>=0&&introDone)AU.whoosh(Math.min(1,.45+Math.abs(pV)*.3));AU.stage(st);lastSt=st;$('#st').textContent=STG[st].k.replace('LAYER ','');railA.forEach((a,i)=>a.classList.toggle('on',i===st));$$('.panel.open').forEach(p=>{if(+p.dataset.s!==st)p.classList.remove('open')})}
  const showCap=settled&&st>=1;$('#capbar').classList.toggle('on',showCap);if(showCap&&capSt!==st){capSt=st;fillCaption(st)}if(!showCap)capSt=-1;
- $('#bar').style.width=(pC/(NS-1)*100)+'%'}
+ $('#bar').style.width=(cl(pC/(NS-1))*100)+'%'}
+FX.refreshCap=()=>{capSt=-1};
 function fillCaption(st){const s=STG[st];$('#ck').textContent=s.k;let c=s.c;
- if(st===3&&QR)c+=` Your question: <b>"${esc(QR.q)}"</b>`;
+ if(st===1&&SK1.length)c+=` Your question lights up <b>${SK1.map(esc).join(' + ')}</b>.`;
+ if(st===3&&QR)c+=` Your question: <b>"${esc(QR.q)}"</b><form class="capask" id="capask"><input id="capq" autocomplete="off" maxlength="120" placeholder="ask it something else about me"><button class="btn pri">run ▶</button></form><div class="capans" id="capans"></div>`;
  if(st===7&&QR)c=`Your question <b>"${esc(QR.q)}"</b> decoded to: <span style="font-family:var(--serif);font-size:18px;color:#fff">“${esc(QR.text)}”</span><br><span class="small">Ask it "who should we hire?" and it puts p = 1 − 1.4e-6 on "Jainam".</span>`;
- $('#ct').innerHTML=c;$('#cs').innerHTML=s.s?s.s.map(([a,b])=>`<span><b>${esc(a)}</b> ${esc(b)}</span>`).join(''):'';
+ $('#ct').innerHTML=c;const ca=$('#capask');if(ca)ca.onsubmit=e=>{e.preventDefault();const v=$('#capq').value.trim();if(v)ask(v,true)};$('#cs').innerHTML=s.s?s.s.map(([a,b])=>`<span><b>${esc(a)}</b> ${esc(b)}</span>`).join(''):'';
  const cx=$('#cx');cx.innerHTML='';if(st===7){cx.innerHTML='<a class="btn pri" href="mailto:jainamkshahh@gmail.com">email me</a><a class="btn" href="https://linkedin.com/in/jainamshahh" target="_blank" rel="noopener">linkedin</a><a class="btn" href="https://github.com/JainamShahhh" target="_blank" rel="noopener">github</a>'}
  const d=document.createElement('button');d.className='btn';d.textContent='details ↗';d.onclick=()=>{const p=$(`.panel[data-s="${st}"]`);p&&p.classList.toggle('open')};cx.appendChild(d)}
 
 /* ================= clickable 3D: hover + click (and tap) on rings, neurons, layers, bars, tokens, the name, me ================= */
 const ray=new THREE.Raycaster(),mNDC=new THREE.Vector2(-9,-9);ray.layers.enableAll();let hotNow=null;const tip=$('#tip'),modalOpen=()=>$$('.modal.on').length>0;
 FX.hover=(id,on)=>{hoverCard=on?id:null};
-function pick(){if(!introDone||modalOpen()||mNDC.x<-5){setHot(null);return}const st=Math.round(pC);if(Math.abs(pC-st)>.3){setHot(null);return}
+function pick(){if(!introDone||modalOpen()||mNDC.x<-5){setHot(null);return}const st=stOf(pC);if(Math.abs(pC-Math.round(pC))>.3){setHot(null);return}
  const cands=HOT.filter(h=>h.st===st);if(!cands.length){setHot(null);return}ray.setFromCamera(mNDC,cam);const hits=ray.intersectObjects(cands.map(h=>h.o),false);
  if(!hits.length){setHot(null);return}setHot(cands.find(c=>c.o===hits[0].object),hits[0].point)}
 function setHot(h,p){if(hotNow&&hotNow!==h){hotNow.on&&hotNow.on(false)}if(h&&h!==hotNow){h.on&&h.on(true);AU.hover()}hotNow=h;
@@ -824,8 +911,8 @@ FX.gyro=()=>{if(!('ontouchstart' in window))return;const h=e=>{if(e.gamma==null)
 
 /* ================= autopilot film + one-click trailer recording ================= */
 let FILM=null,REC=null;
-const FSCH=(()=>{const H=[3.4,3.4,3.4,5.2,3.8,3.8,3.8,5.8],MV=2.7,s=[];let t=0;for(let i=0;i<8;i++){s.push({a:t,b:t+H[i],p0:i,p1:i});t+=H[i];if(i<7){s.push({a:t,b:t+MV,p0:i,p1:i+1});t+=MV}}return{s,T:t}})();
-const filmP=t=>{for(const g of FSCH.s)if(t<g.b){if(g.p0===g.p1)return g.p0;const f=(t-g.a)/(g.b-g.a);return g.p0+f*f*(3-2*f)}return 7};
+const FSCH=(()=>{const H=[3.4,3.4,3.4,5.2,3.8,3.8,3.8,5.8],MV=2.7,s=[];let t=0;for(let i=0;i<8;i++){s.push({a:t,b:t+H[i],p0:i,p1:i});t+=H[i];if(i<7){s.push({a:t,b:t+MV,p0:i,p1:i+1});t+=MV}}s.push({a:t,b:t+3.6,p0:7,p1:8});t+=3.6;return{s,T:t}})();
+const filmP=t=>{for(const g of FSCH.s)if(t<g.b){if(g.p0===g.p1)return g.p0;const f=(t-g.a)/(g.b-g.a);return g.p0+f*f*(3-2*f)}return 8};
 FX.film=onEnd=>{if(!introDone)return;$$('.modal.on').forEach(m=>m.classList.remove('on'));FILM={t:0,onEnd};pT=pC=0;scrollTo(0,0);$('#filmb').classList.add('on');AU.arp(1);toast('▶ the film · scroll or press any key to take over',2600)};
 FX.stopFilm=()=>{if(!FILM)return;FILM=null;$('#filmb').classList.remove('on');if(REC)stopRec()};
 ['wheel','touchstart','keydown'].forEach(ev=>addEventListener(ev,e=>{if(FILM&&FILM.t>.4&&!(e.key&&['Shift','Meta','Control','Alt'].includes(e.key)))FX.stopFilm()},{passive:true}));
@@ -849,54 +936,54 @@ function render(){FOC.value=rtS.height/2/Math.tan(cam.fov*Math.PI/360);cam.updat
  down(rtS,BL[0],HDR?1:.72);for(let i=1;i<NB;i++)down(BL[i-1],BL[i]);
  for(let i=NB-2;i>=0;i--){const src=i===NB-2?BL[NB-1]:UL[i+1];upM.uniforms.t.value=src.texture;upM.uniforms.base.value=BL[i].texture;upM.uniforms.px.value.set(1/src.width,1/src.height);pass(upM,UL[i])}
  const u=compM.uniforms;
- if(useRays){const st=Math.round(pC);KEY.set(0,12,introDone?Z(st)-24:Z(7)+4);PJV.copy(KEY).project(cam);const on=PJV.z<1&&Math.abs(PJV.x)<1.6&&Math.abs(PJV.y)<1.6;rayM.uniforms.lp.value.set(PJV.x*.5+.5,PJV.y*.5+.5);rayM.uniforms.t.value=BL[1].texture;pass(rayM,rtRy);u.uRay.value+=((on?(introDone?(st?.2:.05):.38):0)-u.uRay.value)*.08}else u.uRay.value=0;
+ if(useRays){const st=stOf(pC);KEY.set(0,12,introDone?Z(st)-24:Z(7)+4);PJV.copy(KEY).project(cam);const on=PJV.z<1&&Math.abs(PJV.x)<1.6&&Math.abs(PJV.y)<1.6;rayM.uniforms.lp.value.set(PJV.x*.5+.5,PJV.y*.5+.5);rayM.uniforms.t.value=BL[1].texture;pass(rayM,rtRy);u.uRay.value+=((on?(introDone?(st===5||st===6?.025:st?.13:.05):.38):0)-u.uRay.value)*.08}else u.uRay.value=0;
  if(useDof){down(rtS,rtH);down(rtH,rtQ)}
  u.tCol.value=rtS.texture;u.tDep.value=rtS.depthTexture;u.tHalf.value=rtH.texture;u.tQuar.value=rtQ.texture;u.tBloom.value=UL[0].texture;u.tRay.value=rtRy.texture;u.uBloom.value=1.15/NB*(MOB?1.2:1);
  u.uFocus.value=cam.position.distanceTo(look);u.uDof.value=useDof&&introDone?1:0;u.uTime.value=T;u.uBars.value+=(barsT-u.uBars.value)*.12;pass(compM,null)}
 function loop(now){requestAnimationFrame(loop);const raw=(now-last)/1000;last=now;const dt=Math.min(.05,Math.max(0,raw));T+=dt;SH.time.value=T;
  if(!STARTED){const a=T*.035;cam.position.set(EST2.x*Math.cos(a)-10,EST2.y,EST2.z+Math.sin(a)*30);look.copy(EST2l);cam.lookAt(look);baseFov=38;FOG.value=.0042;wU.uWall.value=.55;rvU.uA.value=.7;barsT=1;compM.uniforms.uFade.value=.75}
  else if(!introDone){intro+=dt;introUpdate(intro,dt)}
- else{if(FILM){FILM.t+=dt;pT=filmP(FILM.t);const m=document.documentElement.scrollHeight-innerHeight;scrollTo(0,m*pT/7);if(FILM.t>FSCH.T){const cb=FILM.onEnd;FILM=null;$('#filmb').classList.remove('on');cb&&cb()}}
-  const pp=pC;pC+=(pT-pC)*(1-Math.exp(-dt*(FILM?9:4.2)));pV+=((pC-pp)/Math.max(dt,1e-3)-pV)*.2;camAt(pC,T,mx,my);wU.uWall.value+=(.3-wU.uWall.value)*(1-Math.exp(-dt*3));wU.uPk.value=pC;wU.uPkI.value=.55;
+ else{if(FILM){FILM.t+=dt;pT=filmP(FILM.t);const m=document.documentElement.scrollHeight-innerHeight;scrollTo(0,m*pT/8)}
+  const pp=pC;pC+=(pT-pC)*(1-Math.exp(-dt*(FILM?9:4.2)));pV+=((pC-pp)/Math.max(dt,1e-3)-pV)*.2;camAt(pC,T,mx,my);const stR=stOf(pC);if(pT>=7.995&&introDone){clearTimeout(snapT);scrollTo(0,0);pT=0;pC-=8;if(FILM){const cb=FILM.onEnd;FILM=null;$('#filmb').classList.remove('on');cb&&cb()}}wU.uWall.value+=(([.3,.3,.3,.3,.3,.13,.13,.3][stR])-wU.uWall.value)*(1-Math.exp(-dt*3));compM.uniforms.uAper.value+=(([.42,.3,.3,.42,.42,.12,.16,.42][stR])-compM.uniforms.uAper.value)*(1-Math.exp(-dt*3));wU.uPk.value=pC;wU.uPkI.value=.55;
   compM.uniforms.uSpeed.value=RM?0:Math.min(.85,Math.abs(pV)*.32)}
  scene.fog.density=FOG.value;cam.fov+=(baseFov+Math.min(9,Math.abs(pV)*5)-cam.fov)*(1-Math.exp(-dt*7));cam.updateProjectionMatrix();
  flowOff+=dt*(5+Math.min(80,Math.abs(pV)*40));rvU.uOff.value=flowOff;rvU.uT.value=T;
  for(let i=1;i<NS;i++){const d=Math.abs(pC-i),r=!STARTED||introGroups?1:(introDone?cl((1-d)/.45):0),e=r>=1?1:1-Math.pow(1-r,3);G[i].visible=r>.001;G[i].scale.setScalar(Math.max(.001,e))}
  TITLES.forEach((Tt,i)=>{if(!Tt)return;const d=Math.abs(pC-i),on=introDone&&d<.3?1:0,u=Tt.material.uniforms;u.uRev.value+=((on?1:0)-u.uRev.value)*(1-Math.exp(-dt*(on?2.4:7)));u.uOp.value=introDone?1-cl((d-.3)/.5):0;Tt.visible=u.uOp.value>.01});
- const s0=introDone?Math.max(0,1-pC*1.6):0;wU.uHero.value=Math.max(.15,1-pC*.35);
+ const s0=introDone?Math.max(0,1-pC*1.6):0;wU.uHero.value=Math.max(.15,1-(pC>7.5?8-pC:Math.max(0,pC))*.35);
  if(mNDC.x>-5&&introDone){ray.setFromCamera(mNDC,cam);const pl=new THREE.Plane(new THREE.Vector3(0,0,1),-look.z),hp2=new THREE.Vector3();if(ray.ray.intersectPlane(pl,hp2)){if(near(0,.6))wU.uM.value.copy(hp2);curL.position.copy(hp2).addScaledVector(ray.ray.direction,-3);SH.uCur.value.copy(curL.position)}}
  const ci=T-lastMove<2.5&&introDone?1:0;curL.intensity+=(ci*2.6-curL.intensity)*.08;SH.uCurI.value=curL.intensity/2.6;
- if(near(1))upd1(T);if(near(2)||introGroups)upd2(T);if(near(3))upd3(T,dt);if(near(4)||introGroups)upd4(T,dt);if(near(5))upd5(T,dt);if(near(6))upd6(T,dt);if(near(7)||introGroups)upd7(T);
+ if(near(1))upd1(T,dt);if(near(2)||introGroups)upd2(T,dt);if(near(3))upd3(T,dt);if(near(4)||introGroups)upd4(T,dt);if(near(5))upd5(T,dt);if(near(6))upd6(T,dt);if(near(7)||introGroups)upd7(T);
  if(por&&near(7)){por.u.uT.value=T;por.u.uK.value+=((introDone&&Math.abs(pC-7)<.6?1:0)-por.u.uK.value)*(1-Math.exp(-dt*2.2));
   if(mNDC.x>-5){ray.setFromCamera(mNDC,cam);por.plane.setFromNormalAndCoplanarPoint(new THREE.Vector3(0,0,1),por.pts.getWorldPosition(new THREE.Vector3()));const h3=new THREE.Vector3();if(ray.ray.intersectPlane(por.plane,h3))por.u.uM.value.copy(por.pts.worldToLocal(h3))}}
  if((fr&1)===0)pick();updUI();render();
  if(introDone&&!QLOCK&&!REC&&raw<.25){fa+=raw;fr++;if(fr>=150){const avg=fa/fr;if(avg>1/40&&ql<3){ql++;applyQ()}fr=0;fa=0}}else fr++}
 history.scrollRestoration='manual';scrollTo(0,0);readScroll();requestAnimationFrame(loop);
-window.__dbg={get pC(){return pC},jump(i){go(i);pT=pC=i},start(){FX.start()},end(){endIntro()},get intro(){return intro},setIntro(t){intro=t}};
+window.__dbg={get pC(){return pC},jump(i){go(i);pT=pC=i},start(){FX.start()},end(){endIntro()},get intro(){return intro},setIntro(t){intro=t},setP(v){pT=pC=v}};
 }
 
 /* ================= shared UI ================= */
 function lightPos(X,Y){for(const el of $$('.glass')){if(el.offsetParent===null&&!el.classList.contains('hud'))continue;const r=el.getBoundingClientRect();if(!r.width)continue;el.style.setProperty('--lx',Math.max(-20,Math.min(120,(X-r.left)/r.width*100))+'%');el.style.setProperty('--ly',Math.max(-30,Math.min(130,(Y-r.top)/r.height*100))+'%');el.style.setProperty('--la',(Math.atan2(Y-(r.top+r.height/2),X-(r.left+r.width/2))*180/Math.PI+90)+'deg')}}
-function go(i){if(document.body.classList.contains('nogl')){(i?$(`.panel[data-s="${i}"]`):$('#hero'))?.scrollIntoView({behavior:'smooth'});return}const m=document.documentElement.scrollHeight-innerHeight;scrollTo({top:m*i/(NS-1),behavior:RM?'auto':'smooth'})}
+function go(i){if(document.body.classList.contains('nogl')){(i?$(`.panel[data-s="${i}"]`):$('#hero'))?.scrollIntoView({behavior:'smooth'});return}const m=document.documentElement.scrollHeight-innerHeight;scrollTo({top:m*i/8,behavior:RM?'auto':'smooth'})}
 let GLFAIL=false;
 function noGL(){document.body.classList.add('nogl');document.body.classList.remove('lock');introDone=true;$('#hud').classList.add('on');['#rpl','#filmb','#rec','#filmb2'].forEach(s=>{const e=$(s);if(e)e.style.display='none'});$('#hero').classList.add('on');addEventListener('pointermove',e=>lightPos(e.clientX,e.clientY),{passive:true});heroAnswer()}
 
 /* ================= the hero: the model's answer streams under the name it just built ================= */
-async function heroAnswer(){const r=QR,el=$('#hans');if(!r){el.textContent='Jainam Shah, ML engineer.';return}$('#hq').textContent=r.q;el.innerHTML='';let s='';
- for(let i=0;i<r.out.length;i++){s+=r.out[i].s;el.innerHTML=esc(s.trimStart())+'<span class="caret"></span>';if(i%2===0)AU.tick(1300+((r.out[i].id*53)%1100),.012);await sleep(RM?0:36)}el.innerHTML=esc(s.trim())}
-FX.onIntroEnd=heroAnswer;
+async function heroAnswer(reader){const r=QR;if(!r){$('#hans').textContent='Jainam Shah, ML engineer.';return}$('#hq').textContent=r.q;const els=[$('#hans'),$('#capans')].filter(Boolean);let s='';
+ for(let i=0;i<r.out.length;i++){s+=r.out[i].s;const h=esc(s.trimStart())+'<span class="caret"></span>';els.forEach(e=>e.innerHTML=h);if(reader)FX.reader(i);if(i%2===0)AU.tick(1300+((r.out[i].id*53)%1100),.012);await sleep(RM?0:reader?55:36)}els.forEach(e=>e.innerHTML=esc(s.trim()));if(reader)setTimeout(()=>FX.idle(),2600)}
+FX.onIntroEnd=()=>heroAnswer(false);
 ["what did he win?","tell me about parry","why should we hire him?","can he work in canada?","what are you?"].forEach(s=>{const b=document.createElement('button');b.type='button';b.textContent=s;b.onclick=()=>{$('#askq').value=s;ask(s)};$('#sugg').appendChild(b)});
 let busy=0;$('#askf').onsubmit=e=>{e.preventDefault();const q=$('#askq').value.trim();if(q&&!busy)ask(q)};
-async function ask(q){if(!M){$('#hans').textContent='model failed to load.';return}busy=1;const t0=performance.now(),r=M.run(q),ms=performance.now()-t0;FX.applyQ(r);QR=r;
+async function ask(q,fromCap){if(!M){$('#hans').textContent='model failed to load.';return}if(busy)return;busy=1;const t0=performance.now(),r=M.run(q),ms=performance.now()-t0;FX.applyQ(r);QR=r;FX.refreshCap&&FX.refreshCap();
  const tk=$('#tks');tk.innerHTML='';r.toks.forEach(t=>{const s=document.createElement('span');s.className='tk'+(t.id===4?' unk':'');s.innerHTML=esc(t.w)+`<i>${t.id===4?'unk':t.id}</i>`;tk.appendChild(s)});
  $('#ans').textContent=r.text;$('#mc').textContent=`${r.out.length} tokens in ${ms.toFixed(1)} ms on your device · ${r.toks.filter(t=>t.id===4).length} unknown words · ${M.cfg.L} layers · ${M.cfg.H} heads · d=${M.cfg.D} · vocab ${M.cfg.V} · int8 · greedy`;
- await heroAnswer();busy=0;if(!document.body.classList.contains('nogl'))toast('now scroll ↓ and watch it think about your question',3200)}
+ if(fromCap)await sleep(90);await heroAnswer(!!fromCap);busy=0;if(!fromCap&&!document.body.classList.contains('nogl'))toast('now scroll ↓ and watch it think about your question',3200)}
 if(M&&QR){const r=QR;$('#ans').textContent=r.text;$('#mc').textContent=`${M.cfg.L} layers · ${M.cfg.H} heads · d=${M.cfg.D} · vocab ${M.cfg.V} · int8 weights · greedy decoding`;r.toks.forEach(t=>{const s=document.createElement('span');s.className='tk';s.innerHTML=esc(t.w)+`<i>${t.id}</i>`;$('#tks').appendChild(s)})}
 
 /* ================= gate ================= */
 function begin(withSound){if($('#gate').classList.contains('off'))return;if(withSound)AU.enable();$('#gate').classList.add('off');FX.gyro&&FX.gyro();if(GLFAIL||!window.THREE){noGL();return}FX.start()}
-$('#gs').onclick=()=>begin(true);$('#gq').onclick=()=>begin(false);
-addEventListener('keydown',e=>{if(!$('#gate').classList.contains('off')&&e.key==='Enter')begin(true)});
+$('#gate').addEventListener('click',()=>begin(true));
+addEventListener('keydown',e=>{if(!$('#gate').classList.contains('off')&&!e.metaKey&&!e.ctrlKey)begin(true)});
 
 /* ================= drawers, cards, HUD ================= */
 $$('[data-close]').forEach(b=>b.onclick=()=>b.closest('.panel').classList.remove('open'));
@@ -945,7 +1032,7 @@ window.__ask=q=>M?M.run(q).text:'no model';
 /* ================= boot: fonts first (the name is drawn with them), then the engine ================= */
 const hasGL=!Q.has('nogl')&&(()=>{try{const c=document.createElement('canvas');return!!(window.WebGLRenderingContext&&(c.getContext('webgl2')||c.getContext('webgl')))}catch(e){return false}})();
 (async()=>{try{await Promise.race([Promise.all([document.fonts.load('400 100px "Instrument Serif"'),document.fonts.load('italic 400 100px "Instrument Serif"')]),sleep(2500)])}catch(e){}
- if(hasGL&&window.THREE){try{init3D();$('#gload').textContent=`${KP} WEIGHTS LOADED · READY`;if(Q.has('autostart'))begin(false)}catch(e){console.error(e);GLFAIL=true;$('#gload').textContent='3D unavailable · enter for the readable version'}}
+ if(hasGL&&window.THREE){try{init3D();$('#gload').textContent=`${KP} WEIGHTS LOADED · READY`;if(Q.has('autostart'))begin(true)}catch(e){console.error(e);GLFAIL=true;$('#gload').textContent='3D unavailable · enter for the readable version'}}
  else{GLFAIL=true;$('#gload').textContent='3D unavailable on this device · enter for the readable version'}})();
 
 </script>
